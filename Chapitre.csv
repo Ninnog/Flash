@@ -1,0 +1,41 @@
+id_chap,nom_chap,id_matiere,id_utilisateur
+1,Trigonométrie,1,1
+2,Inégalités et fonctions,1,1
+3,Calcul algébrique,1,1
+4,Nombres complexes,1,1
+5,Fonctions usuelles,1,1
+6,Calculs de primitives,1,1
+7,Équations différentielles linéaires,1,1
+8,Compléments sur les réels,1,1
+9,"Ensembles, applications et relations binaires",1,1
+10,Suites numériques,1,1
+11,Suites numériques particulières,1,1
+12,Structures algébriques usuelles,1,1
+13,Limite et continuité des fonctions numériques,1,1
+14,Calculs matriciels et systèmes linéaires,1,1
+15,Dérivabilité des fonctions numériques,1,1
+16,Arithmétique sur Z,1,1
+17,Polynômes,1,1
+18,Espaces vectoriels,1,1
+19,Espaces vectoriels de dimension finie,1,1
+20,Analyse asymptotique,1,1
+21,Applications linéaires,1,1
+22,Arithmétique des polynômes,1,1
+23,Fractions rationnelles,1,1
+24,Séries numériques,1,1
+25,Intégration sur un segment,1,1
+26,Groupe symétrique,1,1
+27,Déterminants,1,1
+28,Dénombrement et probabilités finies,1,1
+29,Espaces préhilbertiens réels,1,1
+30,Variables aléatoires sur un univers fini,1,1
+31,Fonctions convexes,1,1
+32,Fonctions de deux variables,1,1
+33,Familles numériques sommables,1,1
+34,Aconnaitre,1,1
+35,Vocabulaire,5,1
+36,Vocabulaire,4,1
+37,Aconnaitre,2,1
+38,Aconnaitre,3,1
+39,Aconnaitre,4,1
+40,Aconnaitre,5,1
