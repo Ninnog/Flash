@@ -1,8 +1,15 @@
 services:
-  web:
+  flash:
     build: .
     container_name: flash_app
     ports:
       - "7000:8000"
+    labels:
+      - "traefik.enable=true"
+      - "traefik.http.routers.mon-autre-service.rule=Host(`flash.book-plouc.fr`)"  # Remplace par ton domaine
+      - "traefik.http.routers.mon-autre-service.entrypoints=websecure"  # Utilise HTTPS
+      - "traefik.http.routers.mon-autre-service.tls=true"
+      - "traefik.http.routers.mon-autre-service.tls.certresolver=lets-encrypt"
+      - "traefik.http.services.mon-autre-service.loadbalancer.server.port=7000"  # Port interne du service
     volumes:
       - .:/app
