@@ -1,0 +1,8 @@
+services:
+  web:
+    build: .
+    container_name: flash_app
+    ports:
+      - "7000:8000"
+    volumes:
+      - .:/app
