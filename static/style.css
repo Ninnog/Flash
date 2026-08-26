@@ -851,3 +851,614 @@ summary{
 .blocmatiere:active {
   transform: translateY(-1px);
 } 
+
+/* =========================
+   HUB GESTION DES CARTES
+========================= */
+
+.hub {
+    width: min(900px, 92vw);
+
+    margin: 0 auto;
+
+    display: flex;
+    flex-direction: column;
+
+    align-items: center;
+
+    padding: 40px 20px;
+}
+
+
+/* TITRE */
+
+.hub-intro {
+    text-align: center;
+
+    margin-bottom: 45px;
+}
+
+.hub-intro h1 {
+    margin-bottom: 10px;
+
+    font-size: clamp(2rem, 5vw, 3.2rem);
+
+    color: var(--texte);
+}
+
+.hub-intro p {
+    margin: 0;
+
+    color: var(--secondaire);
+
+    font-size: 1.1rem;
+}
+
+
+/* GRILLE */
+
+.hub-grid {
+    width: 100%;
+
+    display: grid;
+
+    grid-template-columns: repeat(3, 1fr);
+
+    gap: 22px;
+}
+
+
+/* CARTE */
+
+.hub-card {
+    position: relative;
+
+    min-height: 270px;
+
+    padding: 30px 25px;
+
+    display: flex;
+    flex-direction: column;
+
+    align-items: flex-start;
+
+    text-decoration: none;
+
+    color: var(--texte);
+
+    background:
+        linear-gradient(
+            135deg,
+            #faf7f3,
+            #f1e6d9
+        );
+
+    border:
+        1px solid
+        hsla(33, 35%, 70%, 0.7);
+
+    border-radius: 24px;
+
+    box-shadow:
+        0 8px 24px rgba(100, 70, 40, 0.10),
+        inset 0 1px 0 rgba(255, 255, 255, 0.7);
+
+    transition:
+        transform 0.2s,
+        box-shadow 0.2s,
+        border-color 0.2s;
+}
+
+
+.hub-card:hover {
+    transform: translateY(-8px);
+
+    border-color: var(--accent);
+
+    box-shadow:
+        0 18px 40px rgba(100, 70, 40, 0.18),
+        inset 0 1px 0 rgba(255, 255, 255, 0.8);
+}
+
+
+/* ICONE */
+
+.hub-icon {
+    width: 60px;
+    height: 60px;
+
+    display: flex;
+
+    justify-content: center;
+    align-items: center;
+
+    margin-bottom: 25px;
+
+    font-size: 1.8rem;
+
+    border-radius: 18px;
+
+    background:
+        linear-gradient(
+            135deg,
+            hsla(4, 88%, 61%, 0.15),
+            hsla(24, 84%, 50%, 0.18)
+        );
+
+    border:
+        1px solid
+        hsla(24, 84%, 50%, 0.15);
+}
+
+
+/* TEXTE */
+
+.hub-content h2 {
+    margin: 0 0 12px 0;
+
+    text-align: left;
+
+    font-size: 1.35rem;
+
+    color: var(--texte);
+}
+
+
+.hub-content p {
+    margin: 0;
+
+    line-height: 1.6;
+
+    font-size: 0.95rem;
+
+    color: var(--secondaire);
+}
+
+
+/* FLECHE */
+
+.hub-arrow {
+    position: absolute;
+
+    right: 25px;
+    bottom: 22px;
+
+    font-size: 1.5rem;
+
+    color: var(--accent);
+
+    transition: transform 0.2s;
+}
+
+
+.hub-card:hover .hub-arrow {
+    transform: translateX(7px);
+}
+
+
+/* RESPONSIVE */
+
+@media (max-width: 800px) {
+
+    .hub-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .hub-card {
+        min-height: 180px;
+    }
+
+}
+
+/* =========================
+   HUB
+========================= */
+
+.hub {
+    width: min(1100px, 92vw);
+    margin: 0 auto;
+    padding: 40px 20px;
+}
+
+
+/* TITRE */
+
+.hub-intro {
+    text-align: center;
+    margin-bottom: 45px;
+}
+
+.hub-intro h1 {
+    font-size: 2.4rem;
+    margin-bottom: 10px;
+}
+
+.hub-intro p {
+    color: var(--secondaire);
+    margin: 0;
+}
+
+
+/* LES 3 CARTES */
+
+.hub-grid {
+    width: 100%;
+
+    display: grid;
+
+    grid-template-columns: repeat(3, 1fr);
+
+    gap: 25px;
+}
+
+
+/* CARTE GENERALE */
+
+.hub-card {
+    position: relative;
+
+    min-height: 300px;
+
+    padding: 30px;
+
+    display: flex;
+    flex-direction: column;
+
+    text-decoration: none;
+
+    color: var(--texte);
+
+    background: #faf7f3;
+
+    border-radius: 24px;
+
+    border: 1px solid hsla(33, 35%, 70%, 0.7);
+
+    box-shadow:
+        0 8px 22px rgba(100, 70, 40, 0.10);
+
+    transition:
+        transform 0.2s ease,
+        box-shadow 0.2s ease;
+}
+
+.hub-card:hover {
+    transform: translateY(-8px);
+
+    box-shadow:
+        0 18px 38px rgba(100, 70, 40, 0.18);
+}
+
+
+/* ICONE */
+
+.hub-icon {
+    width: 65px;
+    height: 65px;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    border-radius: 18px;
+
+    font-size: 2rem;
+
+    margin-bottom: 25px;
+}
+
+
+/* TEXTE */
+
+.hub-card h2 {
+    margin: 0 0 15px;
+
+    font-size: 1.35rem;
+
+    text-align: left;
+}
+
+.hub-card p {
+    margin: 0;
+
+    color: var(--secondaire);
+
+    font-size: 0.95rem;
+
+    line-height: 1.6;
+}
+
+
+/* FLECHE */
+
+.hub-arrow {
+    position: absolute;
+
+    bottom: 25px;
+    right: 28px;
+
+    font-size: 1.7rem;
+
+    transition: transform 0.2s;
+}
+
+.hub-card:hover .hub-arrow {
+    transform: translateX(8px);
+}
+
+
+/* =========================
+   CARTE 1
+========================= */
+
+.hub-chapitre {
+    border-top: 5px solid var(--col-3);
+}
+
+.hub-chapitre .hub-icon {
+    background: hsla(42, 79%, 51%, 0.15);
+}
+
+.hub-chapitre .hub-arrow {
+    color: var(--col-3);
+}
+
+
+/* =========================
+   CARTE 2
+========================= */
+
+.hub-ajout {
+    border-top: 5px solid var(--accent);
+}
+
+.hub-ajout .hub-icon {
+    background: hsla(24, 84%, 50%, 0.15);
+}
+
+.hub-ajout .hub-arrow {
+    color: var(--accent);
+}
+
+
+/* =========================
+   CARTE 3
+========================= */
+
+.hub-modif {
+    border-top: 5px solid var(--col-5);
+}
+
+.hub-modif .hub-icon {
+    background: hsla(194, 59%, 56%, 0.15);
+}
+
+.hub-modif .hub-arrow {
+    color: var(--col-5);
+}
+
+
+/* =========================
+   RESPONSIVE
+========================= */
+
+@media (max-width: 850px) {
+
+    .hub-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .hub-card {
+        min-height: 200px;
+    }
+
+}
+
+/* ============================
+   HUB - PAGE GESTION
+============================ */
+
+.hub-page {
+    width: 100%;
+    max-width: 1200px;
+
+    padding: 100px 30px 50px;
+
+    margin: 0 auto;
+    margin-top: -10vh;
+}
+
+
+/* TITRE */
+
+.hub-title {
+    width: 100%;
+    text-align: center;
+
+    margin-bottom: 50px;
+}
+
+.hub-title h1 {
+    margin: 0 0 10px;
+    font-size: 3.5rem;
+}
+
+
+
+
+/* CONTENEUR DES 3 CARTES */
+
+.hub-cards {
+    width: 100%;
+
+    display: grid !important;
+
+    grid-template-columns: repeat(3, minmax(0, 1fr)) !important;
+
+    gap: 25px;
+
+    align-items: stretch;
+}
+
+
+/* UNE CARTE */
+
+.hub-action-card {
+    display: flex !important;
+
+    flex-direction: column;
+
+    position: relative;
+
+    min-width: 0;
+
+    min-height: 310px;
+
+    padding: 30px;
+
+    border-radius: 24px;
+
+    text-decoration: none !important;
+
+    color: var(--texte) !important;
+
+    background: #faf7f3 !important;
+
+    border: 1px solid hsla(33, 35%, 70%, 1) !important;
+
+    box-shadow:
+        0 8px 24px rgba(100, 70, 40, 0.12) !important;
+
+    overflow: hidden;
+
+    transition:
+        transform 0.2s ease,
+        box-shadow 0.2s ease;
+}
+
+
+.hub-action-card:hover {
+    transform: translateY(-8px);
+
+    box-shadow:
+        0 18px 40px rgba(100, 70, 40, 0.20) !important;
+}
+
+
+/* L'ICONE */
+
+.hub-card-icon {
+    width: 65px;
+    height: 65px;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    margin-bottom: 25px;
+
+    border-radius: 18px;
+
+    font-size: 2rem;
+
+    background: hsla(24, 84%, 50%, 0.15);
+}
+
+
+/* TEXTE */
+
+.hub-card-text h2 {
+    margin: 0 0 15px !important;
+
+    text-align: left !important;
+
+    font-size: 1.4rem;
+}
+
+
+.hub-card-text p {
+    margin: 0;
+
+    font-size: 1rem;
+
+    line-height: 1.6;
+
+    color: var(--secondaire);
+}
+
+
+/* FLECHE */
+
+.hub-card-arrow {
+    position: absolute;
+
+    bottom: 25px;
+    right: 28px;
+
+    font-size: 2rem;
+
+    color: var(--accent);
+
+    transition: transform 0.2s;
+}
+
+.hub-action-card:hover .hub-card-arrow {
+    transform: translateX(8px);
+}
+
+
+/* COULEURS DIFFERENTES */
+
+.card-chapitre {
+    border-top: 6px solid var(--col-3) !important;
+}
+
+.card-chapitre .hub-card-icon {
+    background: hsla(42, 79%, 51%, 0.15);
+}
+
+.card-chapitre .hub-card-arrow {
+    color: var(--col-3);
+}
+
+
+.card-ajout {
+    border-top: 6px solid var(--accent) !important;
+}
+
+.card-ajout .hub-card-icon {
+    background: hsla(24, 84%, 50%, 0.15);
+}
+
+
+.card-modif {
+    border-top: 6px solid var(--col-5) !important;
+}
+
+.card-modif .hub-card-icon {
+    background: hsla(194, 59%, 56%, 0.15);
+}
+
+.card-modif .hub-card-arrow {
+    color: var(--col-5);
+}
+
+
+/* TABLETTE ET TELEPHONE */
+
+@media (max-width: 900px) {
+
+    .hub-cards {
+        grid-template-columns: 1fr !important;
+    }
+
+    .hub-action-card {
+        min-height: 220px;
+    }
+
+}
+
+.hub-title p {
+    margin-top:0;
+    color: var(--secondaire);
+}
