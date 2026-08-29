@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link href="static/style.css" rel="stylesheet">
+  <title>Flashcards - Ninnog/Louis</title>
+</head>
+<body>
+
+  <header class="header">
+    <a href="/" class="logo">FlashCards</a>
+    <nav>
+      <a href="/ajout">Ajouter de cartes</a>
+      <a href="/modif">Modification de cartes</a>
+    </nav>
+  </header>
+
+  <div class="page-body">
+    <div class="card">
+      <div class="card-title">Modifier une carte</div>
+
+      <form id="formulaire" class="form-grid" action="" method="post" enctype="multipart/form-data">
+
+        <div class="selects-row">
+          <div class="form-group">
+            <label for="nom_mat">Matière</label>
+            <select id="nom_mat" name="nom_mat" required>
+              <option value="">-- Choisir --</option>
+              <option value="1">Maths</option>
+              <option value="2">Physique</option>
+              <option value="3">Info</option>
+              <option value="4">Anglais</option>
+              <option value="5">Français</option>
+            </select>
+          </div>
+          <div class="form-group">
+            <label for="nom_chap">Chapitre</label>
+            <select id="nom_chap" name="nom_chap" required>
+              <option value="">-- Choisir --</option>
+            </select>
+          </div>
+          <div class="form-group">
+            <label for="nom_carte">Carte</label>
+            <select id="nom_carte" name="nom_carte" required>
+              <option value="">-- Choisir une carte --</option>
+            </select>
+          </div>
+        </div>
+
+        <div class="divider"></div>
+
+        <div class="form-group">
+          <label for="question">Question</label>
+          <textarea id="question" rows="3"></textarea>
+        </div>
+
+        <div class="form-group">
+          <label for="reponse">Réponse</label>
+          <textarea id="reponse" rows="5"></textarea>
+        </div>
+
+        <div class="form-group">
+          <label>Image actuelle</label>
+          <img id="image-actuelle" style="max-width:100%; display:none;" />
+        </div>
+
+        <div class="form-group">
+          <label for="image">Nouvelle image (optionnel)</label>
+          <input type="file" id="image">
+        </div>
+
+        <input type="submit" class="submit-btn" value="Envoyer la carte →">
+
+        <button
+            type="button"
+            id="supprimer"
+            class="submit-btn delete-btn">
+            Supprimer la carte
+        </button>
+
+      </form>
+    </div>
+  </div>
+
+  <script src="/static/modif.js"></script>
+</body>
+</html>

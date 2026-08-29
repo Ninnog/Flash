@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="fr">
+
+    <head>
+
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+        <title>FlashCards</title>
+
+        <link rel="stylesheet" href="/static/style.css">
+
+    </head>
+
+    <body>
+
+        <header class="header">
+
+            <a href="/" class="logo">Hub</a>
+
+            <nav>
+                <a class ="gestion" href="/page_lien">Gestion</a>
+            </nav>
+
+            <div class="profil">
+                <p class="nom-compte"></p>
+
+                <a href="/compte">
+                    <img
+                        id="profil-btn"
+                        src="static/images/profil.jpg"
+                        alt="Profil"
+                        class="profil-icon">
+                </a>
+            </div>
+
+        </header>
+
+        <button id="back-btn" class="back-btn" style="display:none;">
+            ← Retour
+        </button>
+
+        <section id="page-matieres" class="page">
+
+            <h2>Matières</h2>
+
+            <div id="liste-matieres"></div>
+
+        </section>
+
+        <section id="page-chapitres" class="page" style="display:none;">
+
+            <h2>Chapitres</h2>
+
+            <div id="liste-chapitres"></div>
+
+        </section>
+
+        <section id="page-cartes" class="page" style="display:none; text-align:center;">
+
+            <div id="flashcard" class="flashcard">
+
+                <h3 id="carte-question"></h3>
+
+                <div id="carte-reponse" style="display:none;"></div>
+
+            </div>
+
+            <div id="evaluation" style="display:none; margin-top:20px;">
+
+                <button class="eval-btn" data-value="1">1 - Écartez-vous</button>
+                <button class="eval-btn" data-value="2">2 - Sûrement quelqu'un de bien</button>
+                <button class="eval-btn" data-value="3">3 - CCINP prime</button>
+                <button class="eval-btn" data-value="4">4 - Présent à ce que je fais</button>
+                <button class="eval-btn" data-value="5">5 - Trop facile l'X</button>
+
+            </div>
+
+        </section>
+
+        <div id="popup-utilisateur" class="popup">
+
+            <div class="popup-content">
+
+                <h2>Qui utilise FlashCards ?</h2>
+
+                <button class="choix-user" data-user="Louis">Louis</button>
+                <button class="choix-user" data-user="Ninnog">Ninnog</button>
+
+            </div>
+
+        </div>
+
+        <script src="/static/style.js"></script>
+    </body>
+
+</html>

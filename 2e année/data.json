@@ -1,0 +1,858 @@
+[
+  {
+    "chapitre": "12",
+    "question": "Définition loi de composition interne (lci)",
+    "reponse": "Une lci sur E c'est toute application f de E × E."
+  },
+  {
+    "chapitre": "12",
+    "question": "Définition magma",
+    "reponse": "Tout ensemble muni d'une lci."
+  },
+  {
+    "chapitre": "12",
+    "question": "Définition associativité d'une lci",
+    "reponse": "∀ (x,y,z) ∈ E, (x ★ y) ★ z = x ★ (y ★ z)"
+  },
+  {
+    "chapitre": "12",
+    "question": "Définition commutativité d’une lci",
+    "reponse": "∀ (x,y) ∈ E, x ★ y = y ★ x"
+  },
+  {
+    "chapitre": "12",
+    "question": "Définition de l'élément neutre d'une lci",
+    "reponse": "∃ e ∈ E, ∀ x ∈ E, x ★ e = e ★ x = x. On dit que la loi ★ admet un neutre."
+  },
+  {
+    "chapitre": "12",
+    "question": "Définition monoïde",
+    "reponse": "Un ensemble avec : - lci\n- associativité\n- neutre"
+  },
+  {
+    "chapitre": "12",
+    "question": "Particularité du neutre",
+    "reponse": "Quand il existe, celui ci est unique"
+  },
+  {
+    "chapitre": "12",
+    "question": "Définition de l'inversibilité",
+    "reponse": "Il faut que la lci admette un neutre e.\n∃ x' ∈ E, ∀ x ∈ E, x ★ x' = x' ★ x = e\nAlors x est dit inversible d'inverse x'."
+  },
+  {
+    "chapitre": "12",
+    "question": "Particularité de l'inversibilité + associativité",
+    "reponse": "Si associativité + inverse : \n- l'inverse est unique\n- x et y inversible alors x ★ y inversible d'inverse y' ★ x'"
+  },
+  {
+    "chapitre": "12",
+    "question": "Définition de la distributivité",
+    "reponse": "T est distributivité par rapport à ★ ssi \n∀ (x,y,z) ∈ E, - x T (y ★ z) = (x T y) ★ (x T z)\n- (y ★ z) T x = (y T x) ★ (z T x)"
+  },
+  {
+    "chapitre": "12",
+    "question": "Définition d'une partie stable",
+    "reponse": "Si A une partie de E, A est stable pour ★ ssi ∀ (x,y) ∈ A, x ★ y ∈ A"
+  },
+  {
+    "chapitre": "12",
+    "question": "Définition d'un groupe",
+    "reponse": "Un groupe est un ensemble G avec :\n- une lci\n- lci associative\n- G admet un élément neutre pour la lci\n- Tout élément de G admet un inverse pour la lci qui appartient à G"
+  },
+  {
+    "chapitre": "12",
+    "question": "Définition du groupe-produit",
+    "reponse": "Soit G et G' deux groupes alors (G x G', *) est un groupe dit groupe-produit"
+  },
+  {
+    "chapitre": "12",
+    "question": "3 caractéristiques d'un groupe",
+    "reponse": "1. Il y a unicité du neutre et de l'inverse\n2. Tout groupe est composé au moins de l'élément neutre\n3. Si la lci est commutative alors le groupe est dit abélien"
+  },
+  {
+    "chapitre": "12",
+    "question": "Définition du groupe de permutations",
+    "reponse": "S = { f : E -> E bijection}.\n(S,°) est un groupe dit des permutations."
+  },
+  {
+    "chapitre": "12",
+    "question": "Définition d'un sous-groupe",
+    "reponse": "Une partie H de G est dit sous-groupe si : \n- H est stable pour la lci\n- H est un groupe pour la lci de G"
+  },
+  {
+    "chapitre": "12",
+    "question": "Caractérisation d'un sous-groupe",
+    "reponse": "1. H ≠ 0 \n2. ∀ (x,y) ∈ H, x ★ y ∈ H (stable par composition)\n3. ∀ x ∈ H, x' ∈ H avec x' inverse de x dans le groupe G (stable par passage à l'inverse)"
+  },
+  {
+    "chapitre": "12",
+    "question": "Caractérisation alternative d'un sous-groupe",
+    "reponse": "H ≠ 0 et ∀ (x,y) ∈ H, x ★ y' ∈ H"
+  },
+  {
+    "chapitre": "12",
+    "question": "Définition d'un morphisme de groupes",
+    "reponse": "f : G -> G' est dit morphisme de groupes si G et G' 2 groupes tels que ∀ (x,y) ∈ G, f(x ★ y) = f(x) T f(y)"
+  },
+  {
+    "chapitre": "12",
+    "question": "2 propriétés des morphismes de groupes",
+    "reponse": "1. f(Eg) = Eg'\n2. ∀ x ∈ G, (f(x))' = f(x')"
+  },
+  {
+    "chapitre": "12",
+    "question": "L'image directe d'un sous- groupes",
+    "reponse": "L'image directe de tout sous-groupe H de G, est un sous-groupe de G'"
+  },
+  {
+    "chapitre": "12",
+    "question": "L'image réciproque d'un sous-groupes",
+    "reponse": "L'image réciproque de tout sous-groupe H' de G' est un sous-groupe de G"
+  },
+  {
+    "chapitre": "12",
+    "question": "Définition de Im f",
+    "reponse": "Im f = f(G) = { f(x) | x ∈ G }"
+  },
+  {
+    "chapitre": "12",
+    "question": "Définition de Ker f",
+    "reponse": "Ker f = f<sup>-1</sup>({ Eg' })"
+  },
+  {
+    "chapitre": "12",
+    "question": "Définition d'un morphisme de groupe injectif",
+    "reponse": "Une application f morphisme de groupes est injective si et seulement si Ker f = {Eg}"
+  },
+  {
+    "chapitre": "12",
+    "question": "Définition d'isomorphisme de groupe",
+    "reponse": "f est dit isomorphisme de groupes si f est un morphisme de groupes et que f est bijective"
+  },
+  {
+    "chapitre": "12",
+    "question": "Propriété d'un isomorphisme de groupe",
+    "reponse": "Si f : G -> G' est un isomorphisme alors f<sup>-1</sup> : G'' -> G l'est aussi"
+  },
+  {
+    "chapitre": "12",
+    "question": "Définition d'un anneau",
+    "reponse": "Un anneau est un ensemble A muni de deux lci : \n1. (A, ★) est un groupe abélien\n2. T est associative\n3. T est distributive par rapport à ★\n4. A admet un élément neutre pour T"
+  },
+  {
+    "chapitre": "12",
+    "question": "3 remarques sur les anneaux",
+    "reponse": "1. Il y a unicité de l'élément neutre pour T \n2. Si T commutative alors A est un anneau commutatif\n3. Si les lois sont + et × alors leurs neutres sont notés 0<sub>A<sub> et 1<sub>A<sub>"
+  },
+  {
+    "chapitre": "12",
+    "question": "Définition du groupe des inversibles dans un anneau",
+    "reponse": "Soit (A, +, ×) un anneau\nG = { x ∈ A | x admet un inverse pour la loi × dans A}\n(G, ×) est dit groupe des inversibles de A"
+  },
+  {
+    "chapitre": "12",
+    "question": "Définition d'un sous-anneau",
+    "reponse": "Une partie H d’un anneau (A, +, ×) est un sous-anneau de A si, et seulement si,\n1. 1A ∈ H.\n2. ∀(x, y) ∈ H<sup>2<sup>, x + y ∈ H\n3. ∀x ∈ H, −x ∈ H.\n4. ∀(x, y) ∈ H<sup>2<sup>, x × y ∈ H."
+  },
+  {
+    "chapitre": "12",
+    "question": "Définition d'un morphisme d'anneaux",
+    "reponse": "Une application f : A -> B est dite morphisme d'anneaux si A et B deux anneaux de lois (+, ×) et (★, T) : \n1. f(1<sub>A<sub>) = 1<sub>B<sub>\n2. ∀ (x,y) ∈ A, f(x + y) = f(x) ★ f(y)\n3. ∀ (x,y) ∈ A, f(x × y) = f(x) T f(y)"
+  },
+  {
+    "chapitre": "12",
+    "question": "Propriété d'un morphisme d'anneaux",
+    "reponse": "Si f est une morphismes d'anneaux alors il est aussi morphisme de groupes"
+  },
+  {
+    "chapitre": "12",
+    "question": "Image et noyau d'un morphisme d'anneaux",
+    "reponse": "1. f : A -> B morphisme d'anneaux alors Im f est un sous-anneau de B\n2. f : A -> B morphisme d anneaux avec B ≠ {0B} alors Ker f n est pas un sous-anneau de A"
+  },
+  {
+    "chapitre": "12",
+    "question": "Définition d'un isomorphisme d'anneaux",
+    "reponse": "f est dit isomorphisme d'anneaux si f est morphisme d'anneaux et bijective"
+  },
+  {
+    "chapitre": "12",
+    "question": "Propriété d'un isomorphisme d'anneaux",
+    "reponse": "Si f : A -> B est un isomorphisme d'anneaux alors f<sup>-1<sup> : B -> A l'est aussi"
+  },
+  {
+    "chapitre": "12",
+    "question": "Définition d'un anneau intègre",
+    "reponse": "Un anneau (A, +, ×) est dit intègre si :\n1. A ≠ {0<sub>A<sub>}\n2. ∀ (a,b) ∈ A, a × b = 0<sub>A<sub> donc a = 0<sub>A<sub> ou b = 0<sub>A<sub>"
+  },
+  {
+    "chapitre": "12",
+    "question": "Définition d'un corps commutatif",
+    "reponse": "Un anneau (A, +, ×) est dit corps commutatif si :\n1. A ≠ {0<sub>A<sub>}\n2. A est commutatif\n3. tout élément de A différent de 0<sub>A<sub> admet un inverse dans A pour ×"
+  },
+  {
+    "chapitre": "12",
+    "question": "Propriété d'un corps",
+    "reponse": "Tout corps commutatif est un anneau intègre"
+  },
+  {
+    "chapitre": "12",
+    "question": "Définition d'un sous-corps",
+    "reponse": "Une partie H d'un corps (A, +, ×) est un sous-corps de A ssi : \n1. H est un sous-anneau de A\n2. ∀ x ∈ H, x ≠ 0<sub>A<sub> donc x<sup>-1<sup>∈ H"
+  },
+  {
+    "chapitre": "15",
+    "question": "Définition de la dérivée en un point",
+    "type": "image",
+    "src": "static/1.png",
+    "alt": "Définition de la dérivée",
+    "reponse": null
+  },
+  {
+    "chapitre": "15",
+    "question": "Condition nécessaire de dérivabilité",
+    "type": null,
+    "src": null,
+    "alt": null,
+    "reponse": "Si f est dérivable en a alors f est continue en a."
+  },
+  {
+    "chapitre": "15",
+    "question": "Interprétation géométrique",
+    "type": null,
+    "src": null,
+    "alt": null,
+    "reponse": "La dérivée en a est la pente de la tangente à la courbe en (a, f(a))."
+  },
+  {
+    "chapitre": "15",
+    "question": "Dérivabilité à gauche et à droite",
+    "type": null,
+    "src": null,
+    "alt": null,
+    "reponse": "f est dérivable en a ssi elle est dérivable à gauche et à droite en a et que les deux dérivées sont égales."
+  },
+  {
+    "chapitre": "15",
+    "question": "Opérations sur les fonctions dérivables",
+    "type": null,
+    "src": null,
+    "alt": null,
+    "reponse": "(af+bg)' = af'+bg', (fg)' = f'g + fg', (f/g)' = (f'g − fg')/g²."
+  },
+  {
+    "chapitre": "15",
+    "question": "Théorème de Rolle",
+    "type": null,
+    "src": null,
+    "alt": null,
+    "reponse": "Si f est continue sur [a,b], dérivable sur ]a,b[ et f(a)=f(b), alors ∃c∈]a,b[ tel que f′(c)=0."
+  },
+  {
+    "chapitre": "15",
+    "question": "Inégalité des accroissements finis",
+    "type": null,
+    "src": null,
+    "alt": null,
+    "reponse": "Si |f′| ≤ k alors |f(x) − f(y)| ≤ k|x − y|."
+  },
+  {
+    "chapitre": "15",
+    "question": "Fonctions monotones",
+    "type": null,
+    "src": null,
+    "alt": null,
+    "reponse": "f croissante ⇔ f′ ≥ 0, f décroissante ⇔ f′ ≤ 0."
+  },
+  {
+    "chapitre": "17",
+    "question": "Egalité entre 2 Polynomes",
+    "type": null,
+    "src": null,
+    "alt": null,
+    "reponse": "Tous leur coeficient de même degré sont égaux"
+  },
+  {
+    "chapitre": "17",
+    "question": "deg (P + Q)",
+    "type": null,
+    "src": null,
+    "alt": null,
+    "reponse": "= max (deg(P), deg(Q)) si deg(P) ̸= deg(Q) sinon <="
+  },
+  {
+    "chapitre": "17",
+    "question": "deg(P◦Q)",
+    "type": null,
+    "src": null,
+    "alt": null,
+    "reponse": "deg(P) + deg(Q)"
+  },
+  {
+    "chapitre": "17",
+    "question": "A|B et B|A",
+    "type": null,
+    "src": null,
+    "alt": null,
+    "reponse": "ssi ∃ λ ∈ K∗ tel que A = λB"
+  },
+  {
+    "chapitre": "17",
+    "question": "Division euclidienne de A par B",
+    "type": null,
+    "src": null,
+    "alt": null,
+    "reponse": "A = BQ + R avec deg(R) < deg(B)"
+  },
+  {
+    "chapitre": "17",
+    "question": "Caractérisation de la divisibilité",
+    "type": null,
+    "src": null,
+    "alt": null,
+    "reponse": "α est une racine de P dans K si, et seulement si, le polynôme X−α divise P"
+  },
+  {
+    "chapitre": "17",
+    "question": "Propriété sur le nombre de racines",
+    "type": null,
+    "src": null,
+    "alt": null,
+    "reponse": "Si P = 0K[X] alors P a une infinité de racines dans K \n Si P ̸= 0K[X] alors P a au plus deg(P) racines dans K."
+  },
+  {
+    "chapitre": "17",
+    "question": "Multiplicité des racines",
+    "type": null,
+    "src": null,
+    "alt": null,
+    "reponse": "P = (X − α)**m Q avec Q(α) ̸= 0"
+  },
+  {
+    "chapitre": "17",
+    "question": "Polynôme scindé",
+    "type": null,
+    "src": null,
+    "alt": null,
+    "reponse": "Un polynome est scindable sur K si il peut s'écrire comme produit de Polynomes de degré 1"
+  },
+  {
+    "chapitre": "17",
+    "question": "Dérivée n-ième de PxQ et le nom de la formule",
+    "type": "image",
+    "src": "static/deriveePQ.png",
+    "alt": "Définition de la dérivée",
+    "reponse": null
+  },
+  {
+    "chapitre": "17",
+    "question": "Formule de Taylor Polynomiale",
+    "type": "image",
+    "src": "static/taylorP.png",
+    "alt": "Définition de la dérivée",
+    "reponse": null
+  },
+  {
+    "chapitre": "17",
+    "question": "Caractérisation de la multiplicité d’une racine par les polynômes dérivés successifs",
+    "type": null,
+    "src": null,
+    "alt": null,
+    "reponse": "α est racine de multiplicité m dans P ssi : ∀k ∈ [0,m−1] dérivée k-ième en α = 0 et dérivée m-ième ≠ 0"
+  },
+  {
+    "chapitre": "17",
+    "question": "Formule d'interpolation de Lagrange",
+    "type": "image",
+    "src": "static/lagrange.png",
+    "alt": "Définition de la dérivée",
+    "reponse": null
+  },
+  {
+    "chapitre": "17",
+    "question": "Formules de Viète",
+    "type": "image",
+    "src": "static/viete.png",
+    "alt": "Définition de la dérivée",
+    "reponse": null
+  },
+  {
+    "chapitre": "18",
+    "question": "Définition espace vectoriel",
+    "type": "image",
+    "src": "static/def_ev.png",
+    "alt": "",
+    "reponse": null
+  },
+  {
+    "chapitre": "18",
+    "question": "2 règles de calcul dans un ev",
+    "type": "image",
+    "src": "static/calcul.png",
+    "alt": "Définition de la dérivée",
+    "reponse": null
+  },
+  {
+    "chapitre": "18",
+    "question": "Combinaison linéaire d’une famille de vecteurs",
+    "type": "image",
+    "src": "static/CL.png",
+    "alt": "",
+    "reponse": null
+  },
+  {
+    "chapitre": "18",
+    "question": "Définition d'un sous-espace vectoriel",
+    "type": "image",
+    "src": "static/def_sev.png",
+    "alt": "",
+    "reponse": null
+  },
+  {
+    "chapitre": "18",
+    "question": "Caractérisation d'un sous-espace vectoriel",
+    "type": "image",
+    "src": "static/cara_sev.png",
+    "alt": "",
+    "reponse": null
+  },
+  {
+    "chapitre": "18",
+    "question": "Cas d'une intersection de sous-espace vectoriel",
+    "type": "image",
+    "src": "static/inter.png",
+    "alt": "",
+    "reponse": null
+  },
+  {
+    "chapitre": "18",
+    "question": "Définition d'un sous-espace vectoriel engendré par une partie",
+    "type": "image",
+    "src": "static/def_engendre.png",
+    "alt": "",
+    "reponse": null
+  },
+  {
+    "chapitre": "18",
+    "question": "Caractérisation d'un sous-espace vectoriel engendré par une partie",
+    "type": "image",
+    "src": "static/cara_engendre.png",
+    "alt": "",
+    "reponse": null
+  },
+  {
+    "chapitre": "18",
+    "question": "2 théorèmes d'un sous-espace vectoriel engendré par une partie",
+    "type": "image",
+    "src": "static/th_engendre.png",
+    "alt": "",
+    "reponse": null
+  },
+  {
+    "chapitre": "18",
+    "question": "Définition d'une famille/partie génératrice",
+    "type": "image",
+    "src": "static/famille_gen.png",
+    "alt": "",
+    "reponse": null
+  },
+  {
+    "chapitre": "18",
+    "question": "Propriété d'une famille/partie génératrice",
+    "type": "image",
+    "src": "static/prop_famille_gen.png",
+    "alt": "",
+    "reponse": null
+  },
+  {
+    "chapitre": "18",
+    "question": "Définition d'une famille/partie libre",
+    "type": "image",
+    "src": "static/famille_libre.png",
+    "alt": "",
+    "reponse": null
+  },
+  {
+    "chapitre": "18",
+    "question": "2 propriétés d'une famille/partie libre",
+    "type": "image",
+    "src": "static/prop_famille_libre.png",
+    "alt": "",
+    "reponse": null
+  },
+  {
+    "chapitre": "18",
+    "question": "Exemple usuel à connaître",
+    "type": "image",
+    "src": "static/exemple_usuel.png",
+    "alt": "",
+    "reponse": null
+  },
+  {
+    "chapitre": "18",
+    "question": "Définition d'une famille/partie liée",
+    "type": "image",
+    "src": "static/famille_liee.png",
+    "alt": "",
+    "reponse": null
+  },
+  {
+    "chapitre": "18",
+    "question": "2 caractérisations d'une famille/partie liée",
+    "type": "image",
+    "src": "static/cara_famille_liee.png",
+    "alt": "",
+    "reponse": null
+  },
+  {
+    "chapitre": "18",
+    "question": "Définition d'une base",
+    "type": "image",
+    "src": "static/base.png",
+    "alt": "",
+    "reponse": null
+  },
+  {
+    "chapitre": "18",
+    "question": "Caractérisations d'une base",
+    "type": "image",
+    "src": "static/cara_base.png",
+    "alt": "",
+    "reponse": null
+  },
+  {
+    "chapitre": "18",
+    "question": "Définition d'une somme de deux sev",
+    "type": "image",
+    "src": "static/def_somme.png",
+    "alt": "",
+    "reponse": null
+  },
+  {
+    "chapitre": "18",
+    "question": "Propriété d'une somme de deux sev",
+    "type": "image",
+    "src": "static/prop_somme.png",
+    "alt": "",
+    "reponse": null
+  },
+  {
+    "chapitre": "18",
+    "question": "Définition d'une somme directe",
+    "type": "image",
+    "src": "static/def_directe.png",
+    "alt": "",
+    "reponse": null
+  },
+  {
+    "chapitre": "18",
+    "question": "Caractérisation d'une somme directe",
+    "type": "image",
+    "src": "static/cara_directe.png",
+    "alt": "",
+    "reponse": null
+  },
+  {
+    "chapitre": "18",
+    "question": "Définition de sous-espaces supplémentaires",
+    "type": "image",
+    "src": "static/def_supp.png",
+    "alt": "",
+    "reponse": null
+  },
+  {
+    "chapitre": "18",
+    "question": "2 caractérisationsS de sous-espaces supplémentaires",
+    "type": "image",
+    "src": "static/cara_supp.png",
+    "alt": "",
+    "reponse": null
+  },
+  {
+    "chapitre": "19",
+    "question": "Définition espace vectoriel de dim finie",
+    "type": "image",
+    "src": "static/def.png",
+    "alt": "",
+    "reponse": null
+  },
+  {
+    "chapitre": "19",
+    "question": "Algorithme de construction de base",
+    "type": "image",
+    "src": "static/algo_constru.png",
+    "alt": "",
+    "reponse": null
+  },
+  {
+    "chapitre": "19",
+    "question": "Théorème de la base extraite",
+    "type": "image",
+    "src": "static/base_extraite.png",
+    "alt": "",
+    "reponse": null
+  },
+  {
+    "chapitre": "19",
+    "question": "Théorème de la base incomplète",
+    "type": "image",
+    "src": "static/base_incomplete.png",
+    "alt": "",
+    "reponse": null
+  },
+  {
+    "chapitre": "19",
+    "question": "Théorème de l'existence de bases en dimension finie",
+    "type": "image",
+    "src": "static/existence_base.png",
+    "alt": "",
+    "reponse": null
+  },
+  {
+    "chapitre": "19",
+    "question": "Propriété du cardinal des familles libres",
+    "type": "image",
+    "src": "static/card_libre.png",
+    "alt": "",
+    "reponse": null
+  },
+  {
+    "chapitre": "19",
+    "question": "2 propriétés du cardinal des bases",
+    "type": "image",
+    "src": "static/card_base.png",
+    "alt": "",
+    "reponse": null
+  },
+  {
+    "chapitre": "19",
+    "question": "Définition de la dimension",
+    "type": "image",
+    "src": "static/def_dim.png",
+    "alt": "",
+    "reponse": null
+  },
+  {
+    "chapitre": "19",
+    "question": "2 caractérisations des bases en dim finie",
+    "type": "image",
+    "src": "static/cara_base.png",
+    "alt": "",
+    "reponse": null
+  },
+  {
+    "chapitre": "19",
+    "question": "Définition d'un produit fini d'ev",
+    "type": "image",
+    "src": "static/produit.png",
+    "alt": "",
+    "reponse": null
+  },
+  {
+    "chapitre": "19",
+    "question": "2 propriétes de la dimension d'un sev",
+    "type": "image",
+    "src": "static/prop_sev.png",
+    "alt": "",
+    "reponse": null
+  },
+  {
+    "chapitre": "19",
+    "question": "Egalité de sev en dimension finie",
+    "type": "image",
+    "src": "static/egalite_sev.png",
+    "alt": "",
+    "reponse": null
+  },
+  {
+    "chapitre": "19",
+    "question": "Formule de Grassmann",
+    "type": "image",
+    "src": "static/grassman.png",
+    "alt": "",
+    "reponse": null
+  },
+  {
+    "chapitre": "19",
+    "question": "Théorème d'existence de sous-espace supplémentaires",
+    "type": "image",
+    "src": "static/existence.png",
+    "alt": "",
+    "reponse": null
+  },
+  {
+    "chapitre": "19",
+    "question": "2 caractérisations des sous-espaces supplémentaires",
+    "type": "image",
+    "src": "static/cara_supp.png",
+    "alt": "",
+    "reponse": null
+  },
+  {
+    "chapitre": "20",
+    "question": "Définition des relations de comparaison",
+    "type": "image",
+    "src": "static/def.png",
+    "alt": "",
+    "reponse": null
+  },
+  {
+    "chapitre": "20",
+    "question": "Caractérisations des relations de comparaison",
+    "type": "image",
+    "src": "static/cara.png",
+    "alt": "",
+    "reponse": null
+  },
+  {
+    "chapitre": "20",
+    "question": "Equivalents usuels en 0",
+    "type": "image",
+    "src": "static/1.png",
+    "alt": "",
+    "reponse": null
+  },
+  {
+    "chapitre": "20",
+    "question": "Lien entre les relations de comparaison",
+    "type": "image",
+    "src": "static/2.png",
+    "alt": "",
+    "reponse": null
+  },
+  {
+    "chapitre": "20",
+    "question": "Règles usuelles des O",
+    "type": "image",
+    "src": "static/3.png",
+    "alt": "",
+    "reponse": null
+  },
+  {
+    "chapitre": "20",
+    "question": "Règles usuelles des équivalents",
+    "type": "image",
+    "src": "static/4.png",
+    "alt": "",
+    "reponse": null
+  },
+  {
+    "chapitre": "20",
+    "question": "Définition DL",
+    "type": "image",
+    "src": "static/5.png",
+    "alt": "",
+    "reponse": null
+  },
+  {
+    "chapitre": "20",
+    "question": "Unicité du DL",
+    "type": "image",
+    "src": "static/6.png",
+    "alt": "",
+    "reponse": null
+  },
+  {
+    "chapitre": "20",
+    "question": "Troncature d'un DL",
+    "type": "image",
+    "src": "static/7.png",
+    "alt": "",
+    "reponse": null
+  },
+  {
+    "chapitre": "20",
+    "question": "Relation DL et équivalent",
+    "type": "image",
+    "src": "static/dl_equi.png",
+    "alt": "",
+    "reponse": null
+  },
+  {
+    "chapitre": "20",
+    "question": "Fonctions paires et impaires",
+    "type": "image",
+    "src": "static/paire_impaire.png",
+    "alt": "",
+    "reponse": null
+  },
+  {
+    "chapitre": "20",
+    "question": "Caractérisation de la continuité et de la dérivabilité d'un DL",
+    "type": "image",
+    "src": "static/continuite_derivabilite.png",
+    "alt": "",
+    "reponse": null
+  },
+  {
+    "chapitre": "20",
+    "question": "3 opérations sur les DL",
+    "type": "image",
+    "src": "static/operations.png",
+    "alt": "",
+    "reponse": null
+  },
+  {
+    "chapitre": "20",
+    "question": "Théorème d'intégration d'un DL",
+    "type": "image",
+    "src": "static/th_deri.png",
+    "alt": "",
+    "reponse": null
+  },
+  {
+    "chapitre": "20",
+    "question": "Formule de Taylor-Young",
+    "type": "image",
+    "src": "static/th_tayloryoung.png",
+    "alt": "",
+    "reponse": null
+  },
+  {
+    "chapitre": "20",
+    "question": "DL usuels à connaître",
+    "type": "image",
+    "src": "static/dl_usuels.png",
+    "alt": "",
+    "reponse": null
+  },
+  {
+    "chapitre": "34",
+    "question": "Les 5 inégalités triangulaires",
+    "type": null,
+    "src": null,
+    "alt": null,
+    "reponse": "1. ∣b−c∣ < a < b+c\n2. ∣x + y∣ ≤ ∣x∣ + ∣y∣\n3. ∥u + v∥ ≤ ∥u∥ + ∥v∥\n4. ∣sin(x)∣ ≤ ∣x∣\n5. 1 + x ≤ e<sup>x</sup>"
+  },
+  {
+    "chapitre": "34",
+    "question": "Formules des exposants",
+    "type": "image",
+    "src": "images/expo.png",
+    "alt": "",
+    "reponse": null
+  },
+  {
+    "chapitre": "34",
+    "question": "Les formules de Simpson",
+    "type": "image",
+    "src": "images/simpson.png",
+    "alt": "",
+    "reponse": null
+  },
+  {
+    "chapitre": "34",
+    "question": "(a + b)<sup>3</sup>",
+    "type": "image",
+    "src": "images/formule_cube.png",
+    "alt": "",
+    "reponse": null
+  },
+  {
+    "chapitre": "34",
+    "question": "Formule des sommes géométriques et aritmétiques",
+    "type": "image",
+    "src": "images/sommes.png",
+    "alt": "",
+    "reponse": null
+  }
+]
