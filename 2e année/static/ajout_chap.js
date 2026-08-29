@@ -1,6 +1,6 @@
 let utilisateur = "";
 
-let chemin = "http://127.0.0.1:8000" ;
+let chemin = `${window.BACKEND_URL}` ;
 
 document.addEventListener("DOMContentLoaded", () => {
 

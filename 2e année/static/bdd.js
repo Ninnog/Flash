@@ -6,7 +6,7 @@ const supprimerImage = document.getElementById("supprimer-image");
 
 const form = document.getElementById("formulaire");
 
-let chemin = "http://127.0.0.1:8000";
+let chemin = `${window.BACKEND_URL}` ;
 
 supprimerImage.style.display = "none";
 

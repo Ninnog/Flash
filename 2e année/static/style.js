@@ -12,7 +12,7 @@ let utilisateur = "";
 let popupUtilisateur;
 let nomCompte;
 
-let chemin = "http://127.0.0.1:8000";
+let chemin = `${window.BACKEND_URL}` ;
 
 function initUtilisateur() {
 
