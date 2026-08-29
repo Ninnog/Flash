@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="fr">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Ajouter un chapitre - FlashCards</title>
+
+    <link rel="stylesheet" href="/static/style.css">
+
+</head>
+
+<body>
+
+    <header class="header">
+
+        <a href="/page" class="logo">FlashCards</a>
+
+        <div class="profil">
+
+            <p class="nom-compte"></p>
+
+            <a href="/compte">
+
+                <img
+                    id="profil-btn"
+                    src="/static/images/profil.jpg"
+                    alt="Profil"
+                    class="profil-icon">
+
+            </a>
+
+        </div>
+
+    </header>
+
+
+<main class="hub-page">
+
+    <div class="hub-title">
+        <h1>Gestion des cartes</h1>
+        <p>Que souhaites-tu faire ?</p>
+    </div>
+
+    <div class="hub-cards">
+
+        <a href="/ajout-chapitre" class="hub-action-card card-chapitre">
+
+            <div class="hub-card-icon">📚</div>
+
+            <div class="hub-card-text">
+                <h2>Ajouter un chapitre</h2>
+                <p>Crée un nouveau chapitre dans une matière.</p>
+            </div>
+
+            <div class="hub-card-arrow">→</div>
+
+        </a>
+
+
+        <a href="/ajout" class="hub-action-card card-ajout">
+
+            <div class="hub-card-icon">✏️</div>
+
+            <div class="hub-card-text">
+                <h2>Ajouter une carte</h2>
+                <p>Ajoute une nouvelle flashcard à un chapitre.</p>
+            </div>
+
+            <div class="hub-card-arrow">→</div>
+
+        </a>
+
+
+        <a href="/modif" class="hub-action-card card-modif">
+
+            <div class="hub-card-icon">⚙️</div>
+
+            <div class="hub-card-text">
+                <h2>Modifier une carte</h2>
+                <p>Modifie ou supprime une carte existante.</p>
+            </div>
+
+            <div class="hub-card-arrow">→</div>
+
+        </a>
+
+    </div>
+
+</main>
+
+
+    <script src="/static/ajout_chap.js"></script>
+
+</body>
+
+</html>

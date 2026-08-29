@@ -6,6 +6,8 @@ const supprimerImage = document.getElementById("supprimer-image");
 
 const form = document.getElementById("formulaire");
 
+let chemin = "http://127.0.0.1:8000";
+
 supprimerImage.style.display = "none";
 
 imageInput.addEventListener("change", () => {
@@ -40,7 +42,7 @@ matiereSelect.addEventListener("change", async () => {
         const utilisateur = localStorage.getItem("utilisateur");
 
         const response = await fetch(
-            `http://127.0.0.1:8000/chapitres/${matiereId}?utilisateur=${encodeURIComponent(utilisateur)}`
+            `${chemin}/chapitres/${matiereId}?utilisateur=${encodeURIComponent(utilisateur)}`
         );
 
         const chapitres = await response.json();
@@ -85,7 +87,7 @@ form.addEventListener("submit", async (event) => {
     try {
 
         const response = await fetch(
-            "http://127.0.0.1:8000/ajouter-carte",
+            `${chemin}/ajouter-carte`,
             {
                 method: "POST",
                 body: formData

@@ -17,7 +17,7 @@ app.mount("/static", StaticFiles(directory="static"), name="static")
 
 @app.get("/")
 def accueil():
-    return FileResponse("static/page.html")
+    return FileResponse("static/hub.html")
 
 @app.get("/compte")
 def compte():
@@ -50,6 +50,11 @@ class Carte(BaseModel):
     chapitre_id: int
     question: str
     reponse: str
+    
+class ChapitreAjout(BaseModel):
+    matiereId: int
+    nomChapitre: str
+    utilisateur: str
 
 class Note(BaseModel):
     carteId: int
@@ -65,6 +70,76 @@ def nettoyer_nom(nom):
     nom = nom.replace(" ", "_")
     nom = re.sub(r'[\\/*?:"<>|]', "", nom)
     return nom
+
+@app.get("/ajout-chapitre")
+def ajout_chapitre():
+    return FileResponse("static/ajout_chapitre.html")
+
+@app.get("/page")
+def ajout_chapitre():
+    return FileResponse("static/page.html")
+
+@app.get("/page_lien")
+def page_lien():
+    return FileResponse("static/annexe.html")
+
+@app.post("/ajouter-chapitre")
+async def ajouter_chapitre(data: ChapitreAjout):
+
+    conn = sqlite3.connect("flash.db")
+    cursor = conn.cursor()
+
+
+    # Récupération de l'utilisateur
+    cursor.execute(
+        """
+        SELECT id
+        FROM Utilisateur
+        WHERE pseudo = ?
+        """,
+        (data.utilisateur,)
+    )
+
+    user = cursor.fetchone()
+
+
+    if user is None:
+
+        conn.close()
+
+        raise HTTPException(
+            status_code=404,
+            detail="Utilisateur introuvable"
+        )
+
+
+    id_utilisateur = user[0]
+
+
+    # Ajout du chapitre
+    cursor.execute(
+        """
+        INSERT INTO Chapitre
+        (nom_chap, id_matiere, id_utilisateur)
+
+        VALUES (?, ?, ?)
+        """,
+        (
+            data.nomChapitre,
+            data.matiereId,
+            id_utilisateur
+        )
+    )
+
+
+    conn.commit()
+
+    conn.close()
+
+
+    return {
+        "message": "Chapitre ajouté avec succès"
+    }
 
 @app.get("/matieres")
 def get_matieres():

@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="fr">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Ajouter un chapitre - FlashCards</title>
+
+    <link rel="stylesheet" href="/static/style.css">
+
+</head>
+
+<body>
+
+    <header class="header">
+
+        <a href="/page" class="logo">FlashCards</a>
+
+        <nav>
+            <a href="/page_lien">Gestion</a>
+        </nav>
+
+        <div class="profil">
+
+            <p class="nom-compte"></p>
+
+            <a href="/compte">
+
+                <img
+                    id="profil-btn"
+                    src="/static/images/profil.jpg"
+                    alt="Profil"
+                    class="profil-icon">
+
+            </a>
+
+        </div>
+
+    </header>
+
+    <div class = "page-body">
+        <div class = "card">
+            <h2 class = "card-title">Ajouter un chapitre</h2>
+
+
+        <form id="form-ajout-chapitre">
+
+            <label for="matiere">
+                Matière :
+            </label>
+
+            <select id="matiere" required>
+
+                <option value="">
+                    -- Choisir une matière --
+                </option>
+
+            </select>
+
+
+            <label for="nom-chapitre">
+                Nom du chapitre :
+            </label>
+
+            <input
+                type="text"
+                id="nom-chapitre"
+                placeholder="Ex : Les intégrales"
+                required>
+
+
+            <button type="submit">
+                Ajouter le chapitre
+            </button>
+
+        </form>
+
+
+        <p id="message-ajout"></p>
+        </div>
+    </div>
+
+    <script src="/static/ajout_chap.js"></script>
+
+</body>
+
+</html>

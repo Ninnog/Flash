@@ -12,9 +12,30 @@ let utilisateur = "";
 let popupUtilisateur;
 let nomCompte;
 
+let chemin = "http://127.0.0.1:8000";
+
 function initUtilisateur() {
 
-    popupUtilisateur.classList.add("open");
+    // On récupère l'utilisateur déjà enregistré
+    const utilisateurEnregistre = localStorage.getItem("utilisateur");
+
+    if (utilisateurEnregistre) {
+
+        // Un utilisateur a déjà été choisi
+        utilisateur = utilisateurEnregistre;
+
+        // On affiche son nom
+        nomCompte.textContent = utilisateur;
+
+        // Le popup reste fermé
+        popupUtilisateur.classList.remove("open");
+
+    } else {
+
+        // Premier lancement : on affiche le popup
+        popupUtilisateur.classList.add("open");
+
+    }
 
 }
 
@@ -63,7 +84,7 @@ async function loadCartes(chapitreId) {
 
     try {
         const res = await fetch(
-    `http://127.0.0.1:8000/cartes/${chapitreId}?utilisateur=${encodeURIComponent(utilisateur)}`
+    `${chemin}/cartes/${chapitreId}?utilisateur=${encodeURIComponent(utilisateur)}`
 );
         cartes = await res.json();
 
@@ -105,7 +126,7 @@ async function loadMatieres() {
     pageActuelle = "matieres";
     backBtn.style.display = "none";
 
-    const res = await fetch("http://127.0.0.1:8000/matieres");
+    const res = await fetch(`${chemin}/matieres`);
     const matieres = await res.json();
 
     const container = document.getElementById("liste-matieres");
@@ -132,7 +153,7 @@ async function loadChapitres(matiereId) {
     backBtn.style.display = "block";
 
     const res = await fetch(
-    `http://127.0.0.1:8000/chapitres/${matiereId}?utilisateur=${encodeURIComponent(utilisateur)}`
+    `${chemin}/chapitres/${matiereId}?utilisateur=${encodeURIComponent(utilisateur)}`
 );
     const chapitres = await res.json();
 
@@ -173,7 +194,7 @@ document.addEventListener("DOMContentLoaded", () => {
         const note = Number(e.target.dataset.value);
 
         try {
-            await fetch("http://127.0.0.1:8000/note-carte", {
+            await fetch(`${chemin}/note-carte`, {
                 method: "POST",
                 headers: { "Content-Type": "application/json" },
                 body: JSON.stringify({
@@ -200,6 +221,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
         popupUtilisateur.classList.remove("open");
 
+        loadMatieres();
     });
 
 });
@@ -207,7 +229,9 @@ document.addEventListener("DOMContentLoaded", () => {
     document.getElementById("profil-btn").addEventListener("click", () => {
         window.location.href = "compte.html";
     });
-
     initUtilisateur();
-    loadMatieres();
+
+    if (utilisateur) {
+        loadMatieres();
+    }
 });

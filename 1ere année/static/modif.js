@@ -1,3 +1,5 @@
+let chemin = "http://127.0.0.1:8000";
+
 document.addEventListener("DOMContentLoaded", () => {
 
     const matiereSelect = document.getElementById("nom_mat");
@@ -30,7 +32,7 @@ document.addEventListener("DOMContentLoaded", () => {
         try {
 
             const res = await fetch(
-                `http://127.0.0.1:8000/chapitres/${matiereId}?utilisateur=${encodeURIComponent(utilisateur)}`
+                `${chemin}/chapitres/${matiereId}?utilisateur=${encodeURIComponent(utilisateur)}`
             );
 
             const data = await res.json();
@@ -69,7 +71,7 @@ document.addEventListener("DOMContentLoaded", () => {
         try {
 
             const res = await fetch(
-                `http://127.0.0.1:8000/cartes/${chapitreId}?utilisateur=${encodeURIComponent(utilisateur)}`
+                `${chemin}/cartes/${chapitreId}?utilisateur=${encodeURIComponent(utilisateur)}`
             );
 
             const data = await res.json();
@@ -100,7 +102,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
         try {
 
-            const res = await fetch(`http://127.0.0.1:8000/carte/${id}`);
+            const res = await fetch(`${chemin}/carte/${id}`);
             const c = await res.json();
 
             question.value = c.question || "";
@@ -136,7 +138,7 @@ document.addEventListener("DOMContentLoaded", () => {
         try {
 
             const res = await fetch(
-                "http://127.0.0.1:8000/update-carte",
+                `${chemin}/update-carte`,
                 {
                     method: "POST",
                     body: formData
@@ -167,7 +169,7 @@ document.addEventListener("DOMContentLoaded", () => {
         try {
 
             const res = await fetch(
-                "http://127.0.0.1:8000/supprimer-carte",
+                `${chemin}/supprimer-carte`,
                 {
                     method: "POST",
                     body: formData
