@@ -1,78 +1,78 @@
 <!DOCTYPE html>
 <html lang="fr">
-<head>
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <link href="/static/style.css" rel="stylesheet">
-  <title>Flashcards - Ninnog/Louis</title>
-</head>
-<body>
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="/static/style.css" rel="stylesheet">
+    <title>Flashcards - Ninnog/Louis</title>
+  </head>
+  <body>
 
-  <header class="header">
-    <a href="/page" class="logo">FlashCards</a>
-    <nav>
-      <a href="/page_lien">Gestion</a>
-    </nav>
-  </header>
+    <header class="header">
+      <a href="/page" class="logo">FlashCards</a>
+      <nav><a href="/page_lien">Gestion</a></nav>
+    </header>
 
-  <div class="page-body">
-    <div class="card">
-      <div class="card-title">Ajouter une carte</div>
+    <div class="page-body">
+      <div class="card">
+        <div class="card-title">Ajouter une carte</div>
 
-      <form id="formulaire" class="form-grid" action="" method="post" enctype="multipart/form-data">
+        <form id="formulaire" class="form-grid" action="" method="post" enctype="multipart/form-data">
 
-        <div class="selects-row">
-          <div class="form-group">
-            <label for="nom_mat">Matière</label>
-            <select id="nom_mat" name="nom_mat" required>
-              <option value="">-- Choisir --</option>
-              <option value="1">Maths</option>
-              <option value="2">Physique</option>
-              <option value="3">Info</option>
-              <option value="4">Anglais</option>
-              <option value="5">Français</option>
-            </select>
+          <div class="selects-row">
+            <div class="form-group">
+              <label for="nom_mat">Matière</label>
+              <select id="nom_mat" name="nom_mat" required>
+                <option value="">-- Choisir --</option>
+                <option value="1">Maths</option>
+                <option value="2">Physique</option>
+                <option value="3">Info</option>
+                <option value="4">Anglais</option>
+                <option value="5">Français</option>
+              </select>
+            </div>
+            <div class="form-group">
+              <label for="nom_chap">Chapitre</label>
+              <select id="nom_chap" name="nom_chap" required>
+                <option value="">-- Choisir --</option>
+              </select>
+            </div>
           </div>
+
+          <div class="divider"></div>
+
           <div class="form-group">
-            <label for="nom_chap">Chapitre</label>
-            <select id="nom_chap" name="nom_chap" required>
-              <option value="">-- Choisir --</option>
-            </select>
+            <label for="question">Question</label>
+            <textarea id="question" name="question" rows="3" required
+              placeholder="Saisir la question…"></textarea>
           </div>
-        </div>
 
-        <div class="divider"></div>
+          <div class="form-group">
+            <label for="reponse">Réponse</label>
+            <textarea id="reponse" name="reponse" rows="5"
+              placeholder="Saisir la réponse…"></textarea>
+          </div>
 
-        <div class="form-group">
-          <label for="question">Question</label>
-          <textarea id="question" name="question" rows="3" required
-            placeholder="Saisir la question…"></textarea>
-        </div>
+          <div class="form-group">
+            <label for="image">Image (facultative)</label>
+            <input
+                type = "file"
+                id = "image"
+                name = "image"
+                accept = "image/png,image/jpeg,image/jpg,image/webp">
+                <button type="button" id="supprimer-image" class="submit-btn">
+                  Retirer l'image
+                </button>
+          </div>
 
-        <div class="form-group">
-          <label for="reponse">Réponse</label>
-          <textarea id="reponse" name="reponse" rows="5"
-            placeholder="Saisir la réponse…"></textarea>
-        </div>
+          <input type="submit" class="submit-btn" value="Envoyer la carte →">
 
-        <div class="form-group">
-          <label for="image">Image (facultative)</label>
-          <input
-              type = "file"
-              id = "image"
-              name = "image"
-              accept = "image/png,image/jpeg,image/jpg,image/webp">
-              <button type="button" id="supprimer-image" class="submit-btn">
-                Retirer l'image
-              </button>
-        </div>
-
-        <input type="submit" class="submit-btn" value="Envoyer la carte →">
-
-      </form>
+        </form>
+      </div>
     </div>
-  </div>
 
-  <script src="/static/bdd.js"></script>
-</body>
+    <script src="/static/config.js"></script>
+    <script src="/static/bdd.js"></script>
+    
+  </body>
 </html>

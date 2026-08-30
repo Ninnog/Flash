@@ -1,13 +1,10 @@
-let chemin = "http://127.0.0.1:8000";
+let chemin = `${window.BACKEND_URL}` ;
 
 document.addEventListener("DOMContentLoaded", () => {
-
     const matiereSelect = document.getElementById("nom_mat");
     const chapitreSelect = document.getElementById("nom_chap");
     const carteSelect = document.getElementById("nom_carte");
-
     const formulaire = document.getElementById("formulaire");
-
     const question = document.getElementById("question");
     const reponse = document.getElementById("reponse");
     const image = document.getElementById("image");
@@ -15,26 +12,19 @@ document.addEventListener("DOMContentLoaded", () => {
     const supprimerBtn = document.getElementById("supprimer");
 
     matiereSelect.addEventListener("change", async () => {
-
         const matiereId = matiereSelect.value;
-
         chapitreSelect.innerHTML = '<option value="">-- Choisir --</option>';
         carteSelect.innerHTML = '<option value="">-- Carte --</option>';
-
         question.value = "";
         reponse.value = "";
         imageActuelle.style.display = "none";
 
         if (!matiereId) return;
-
         const utilisateur = localStorage.getItem("utilisateur");
-
         try {
-
             const res = await fetch(
                 `${chemin}/chapitres/${matiereId}?utilisateur=${encodeURIComponent(utilisateur)}`
             );
-
             const data = await res.json();
 
             if (!Array.isArray(data)) {
@@ -55,22 +45,16 @@ document.addEventListener("DOMContentLoaded", () => {
     });
 
     chapitreSelect.addEventListener("change", async () => {
-
         const chapitreId = chapitreSelect.value;
-
         carteSelect.innerHTML = '<option value="">-- Carte --</option>';
-
         question.value = "";
         reponse.value = "";
         imageActuelle.style.display = "none";
-
         if (!chapitreId) return;
-
         const utilisateur = localStorage.getItem("utilisateur");
 
         try {
-
-            const res = await fetch(
+             const res = await fetch(
                 `${chemin}/cartes/${chapitreId}?utilisateur=${encodeURIComponent(utilisateur)}`
             );
 
@@ -95,16 +79,12 @@ document.addEventListener("DOMContentLoaded", () => {
     });
 
     carteSelect.addEventListener("change", async () => {
-
         const id = carteSelect.value;
-
         if (!id) return;
 
         try {
-
             const res = await fetch(`${chemin}/carte/${id}`);
             const c = await res.json();
-
             question.value = c.question || "";
             reponse.value = c.reponse || "";
 
@@ -114,7 +94,6 @@ document.addEventListener("DOMContentLoaded", () => {
             } else {
                 imageActuelle.style.display = "none";
             }
-
         } catch (e) {
             console.error(e);
         }
@@ -122,11 +101,8 @@ document.addEventListener("DOMContentLoaded", () => {
     });
 
     formulaire.addEventListener("submit", async (e) => {
-
         e.preventDefault();
-
         const formData = new FormData();
-
         formData.append("carte_id", carteSelect.value);
         formData.append("question", question.value);
         formData.append("reponse", reponse.value);
@@ -136,7 +112,6 @@ document.addEventListener("DOMContentLoaded", () => {
         }
 
         try {
-
             const res = await fetch(
                 `${chemin}/update-carte`,
                 {
@@ -158,16 +133,12 @@ document.addEventListener("DOMContentLoaded", () => {
     });
 
     supprimerBtn.addEventListener("click", async () => {
-
         if (!carteSelect.value) return;
-
         if (!confirm("Supprimer cette carte ?")) return;
-
         const formData = new FormData();
         formData.append("carte_id", carteSelect.value);
 
         try {
-
             const res = await fetch(
                 `${chemin}/supprimer-carte`,
                 {
@@ -177,24 +148,18 @@ document.addEventListener("DOMContentLoaded", () => {
             );
 
             if (res.ok) {
-
                 alert("Carte supprimée");
-
                 carteSelect.innerHTML = '<option value="">-- Carte --</option>';
                 question.value = "";
                 reponse.value = "";
                 imageActuelle.style.display = "none";
 
             } else {
-
                 alert("Erreur suppression");
-
             }
 
         } catch (e) {
             console.error(e);
         }
-
     });
-
 });
