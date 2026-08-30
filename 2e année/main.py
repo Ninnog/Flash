@@ -61,7 +61,7 @@ class Note(BaseModel):
     note: int
 
 def get_conn():
-    conn = sqlite3.connect("flash2.db")
+    conn = sqlite3.connect("flash.db")
     conn.row_factory = sqlite3.Row
     return conn
 
@@ -86,7 +86,7 @@ def page_lien():
 @app.post("/ajouter-chapitre")
 async def ajouter_chapitre(data: ChapitreAjout):
 
-    conn = sqlite3.connect("flash2.db")
+    conn = sqlite3.connect("flash.db")
     cursor = conn.cursor()
 
 

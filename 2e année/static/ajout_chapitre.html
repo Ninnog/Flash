@@ -1,90 +1,65 @@
 <!DOCTYPE html>
 <html lang="fr">
 
-<head>
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Ajouter un chapitre - FlashCards</title>
+        <link rel="stylesheet" href="/static/style.css">
+    </head>
 
-    <meta charset="UTF-8">
+    <body>
 
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <header class="header">
+            <a href="/page" class="logo">FlashCards</a>
+            <nav><a href="/page_lien">Gestion</a></nav>
+            <div class="profil">
 
-    <title>Ajouter un chapitre - FlashCards</title>
+                <p class="nom-compte"></p>
 
-    <link rel="stylesheet" href="/static/style.css">
+                <a href="/compte">
+                    <img id="profil-btn" src="/static/images/profil.jpg" alt="Profil" class="profil-icon">
+                </a>
+            </div>
+        </header>
 
-</head>
+        <div class = "page-body">
+            <div class = "card">
+                
+                <h2 class = "card-title">Ajouter un chapitre</h2>
 
-<body>
+                <form id="form-ajout-chapitre">
 
-    <header class="header">
+                    <label for="matiere">
+                        Matière :
+                    </label>
 
-        <a href="/page" class="logo">FlashCards</a>
+                    <select id="matiere" required>
 
-        <nav>
-            <a href="/page_lien">Gestion</a>
-        </nav>
+                        <option value="">
+                            -- Choisir une matière --
+                        </option>
 
-        <div class="profil">
+                    </select>
 
-            <p class="nom-compte"></p>
+                    <label for="nom-chapitre">
+                        Nom du chapitre :
+                    </label>
 
-            <a href="/compte">
+                    <input type="text" id="nom-chapitre" placeholder="Ex : Les intégrales" required>
 
-                <img
-                    id="profil-btn"
-                    src="/static/images/profil.jpg"
-                    alt="Profil"
-                    class="profil-icon">
+                    <button type="submit">
+                        Ajouter le chapitre
+                    </button>
 
-            </a>
+                </form>
+                <p id="message-ajout"></p>
 
+            </div>
         </div>
 
-    </header>
+        <script src="/static/config.js"></script>
+        <script src="/static/ajout_chap.js"></script>
 
-    <div class = "page-body">
-        <div class = "card">
-            <h2 class = "card-title">Ajouter un chapitre</h2>
-
-
-        <form id="form-ajout-chapitre">
-
-            <label for="matiere">
-                Matière :
-            </label>
-
-            <select id="matiere" required>
-
-                <option value="">
-                    -- Choisir une matière --
-                </option>
-
-            </select>
-
-
-            <label for="nom-chapitre">
-                Nom du chapitre :
-            </label>
-
-            <input
-                type="text"
-                id="nom-chapitre"
-                placeholder="Ex : Les intégrales"
-                required>
-
-
-            <button type="submit">
-                Ajouter le chapitre
-            </button>
-
-        </form>
-
-
-        <p id="message-ajout"></p>
-        </div>
-    </div>
-  <script src="/static/config.js"></script>
-    <script src="/static/ajout_chap.js"></script>
-
-</body>
-
+    </body>
 </html>
