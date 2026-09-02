@@ -31,13 +31,6 @@ def compte():
 def compte():
     return FileResponse("static/ajout.html")
 
-# =====================
-# STATIC IMAGES
-# =====================
-
-# =====================
-# CORS
-# =====================
 app.add_middleware(
     CORSMiddleware,
     allow_origins=["*"],
