@@ -1,7 +1,7 @@
 FROM python:3.11-slim
 
 # Définis le répertoire de travail dans le conteneur
-WORKDIR /app
+WORKDIR /app/2e année
 
 # Installe les dépendances système si nécessaire
 RUN apt-get update && apt-get install -y 
@@ -17,4 +17,4 @@ COPY . .
 EXPOSE 8000
 
 # Commande de lancement
-CMD ["python", "-m", "uvicorn", "main:app", "--host", "0.0.0.0", "--port", "8000", "--reload"]
+CMD ["python", "-m", "uvicorn", "main:app", "--app-dir", "/app/2e année", "--host", "0.0.0.0", "--port", "8000", "--reload"]

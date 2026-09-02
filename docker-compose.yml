@@ -1,16 +1,37 @@
 services:
-  flash:
-    build: .
-    container_name: flash_app
+  flasha1:
+    build: 
+      context: .
+      dockerfile: ./1ere année/Dockerfile
+    container_name: flash_app_1a
     ports:
       - "7000:8000"
     labels:
       - "traefik.enable=true"
-      - "traefik.http.routers.mon-autre-service.rule=Host(`flash.book-plouc.fr`)"  
-      - "traefik.http.routers.mon-autre-service.entrypoints=websecure"  
-      - "traefik.http.routers.mon-autre-service.tls=true"
-      - "traefik.http.routers.mon-autre-service.tls.certresolver=lets-encrypt"
-      - "traefik.http.services.mon-autre-service.loadbalancer.server.port=8000"  # Port interne du service
+      - "traefik.http.routers.flash1a.rule=Host(`flash.book-plouc.fr`)"  
+      - "traefik.http.routers.flash1a.entrypoints=websecure"  
+      - "traefik.http.routers.flash1a.tls=true"
+      - "traefik.http.routers.flash1a.tls.certresolver=lets-encrypt"
+      - "traefik.http.services.flash1a.loadbalancer.server.port=8000"  # Port interne du service
+    volumes:
+      - .:/app
+    networks:
+      - traefik
+  
+  flash2a:
+    build: 
+      context: .
+      dockerfile: ./2e année/Dockerfile
+    container_name: flash_app_12
+    ports:
+      - "7001:8000"
+    labels:
+      - "traefik.enable=true"
+      - "traefik.http.routers.flash2a.rule=Host(`flash2.book-plouc.fr`)"  
+      - "traefik.http.routers.flash2a.entrypoints=websecure"  
+      - "traefik.http.routers.flash2a.tls=true"
+      - "traefik.http.routers.flash2a.tls.certresolver=lets-encrypt"
+      - "traefik.http.services.flash2a.loadbalancer.server.port=8000"  # Port interne du service
     volumes:
       - .:/app
     networks:
@@ -18,4 +39,3 @@ services:
 
 networks:
   traefik:
-    external: true
