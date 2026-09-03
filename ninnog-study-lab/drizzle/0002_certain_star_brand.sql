@@ -1,1 +1,0 @@
-ALTER TABLE `mind_maps` ADD `nodes` json;
