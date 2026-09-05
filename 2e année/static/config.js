@@ -2,6 +2,6 @@ const isDev = window.location.hostname === 'localhost' || window.location.hostna
 
 const BACKEND_URL = isDev
   ? 'http://127.0.0.1:8000'  
-  : 'https://flash.book-plouc.fr'; 
+  : 'https://flash2.book-plouc.fr'; 
   
 window.BACKEND_URL = BACKEND_URL;

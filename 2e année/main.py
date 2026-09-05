@@ -8,6 +8,7 @@ import os
 import shutil
 import time
 import re
+import unidecode
 
 #  python -m uvicorn main:app --reload
 
@@ -31,13 +32,6 @@ def compte():
 def compte():
     return FileResponse("static/ajout.html")
 
-# =====================
-# STATIC IMAGES
-# =====================
-
-# =====================
-# CORS
-# =====================
 app.add_middleware(
     CORSMiddleware,
     allow_origins=["*"],
@@ -61,7 +55,7 @@ class Note(BaseModel):
     note: int
 
 def get_conn():
-    conn = sqlite3.connect("flash.db")
+    conn = sqlite3.connect("flash2.db")
     conn.row_factory = sqlite3.Row
     return conn
 
@@ -86,11 +80,9 @@ def page_lien():
 @app.post("/ajouter-chapitre")
 async def ajouter_chapitre(data: ChapitreAjout):
 
-    conn = sqlite3.connect("flash.db")
+    conn = sqlite3.connect("flash2.db")
     cursor = conn.cursor()
 
-
-    # Récupération de l'utilisateur
     cursor.execute(
         """
         SELECT id
@@ -115,8 +107,6 @@ async def ajouter_chapitre(data: ChapitreAjout):
 
     id_utilisateur = user[0]
 
-
-    # Ajout du chapitre
     cursor.execute(
         """
         INSERT INTO Chapitre
@@ -268,7 +258,9 @@ async def ajouter_carte(
     image_path = ""
 
     if image is not None and image.filename != "":
-
+        
+        nom_chapitre = unidecode.unidecode(nom_chapitre)
+        
         dossier = os.path.join("static", "images", nom_matiere, nom_chapitre)
         os.makedirs(dossier, exist_ok=True)
 
@@ -279,7 +271,7 @@ async def ajouter_carte(
 
         with open(chemin_complet, "wb") as buffer:
             shutil.copyfileobj(image.file, buffer)
-
+        
         image_path = f"{nom_matiere}/{nom_chapitre}/{filename}"
 
     cur.execute("""
