@@ -8,6 +8,7 @@ import os
 import shutil
 import time
 import re
+import unidecode
 
 #  python -m uvicorn main:app --reload
 
@@ -82,8 +83,6 @@ async def ajouter_chapitre(data: ChapitreAjout):
     conn = sqlite3.connect("flash.db")
     cursor = conn.cursor()
 
-
-    # Récupération de l'utilisateur
     cursor.execute(
         """
         SELECT id
@@ -108,8 +107,6 @@ async def ajouter_chapitre(data: ChapitreAjout):
 
     id_utilisateur = user[0]
 
-
-    # Ajout du chapitre
     cursor.execute(
         """
         INSERT INTO Chapitre
@@ -261,7 +258,9 @@ async def ajouter_carte(
     image_path = ""
 
     if image is not None and image.filename != "":
-
+        
+        nom_chapitre = unidecode.unidecode(nom_chapitre)
+        
         dossier = os.path.join("static", "images", nom_matiere, nom_chapitre)
         os.makedirs(dossier, exist_ok=True)
 
@@ -272,7 +271,7 @@ async def ajouter_carte(
 
         with open(chemin_complet, "wb") as buffer:
             shutil.copyfileobj(image.file, buffer)
-
+        
         image_path = f"{nom_matiere}/{nom_chapitre}/{filename}"
 
     cur.execute("""
