@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="fr">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Importer des cartes - FlashCards</title>
+
+    <link rel="stylesheet" href="/static/style.css">
+</head>
+
+<body>
+
+    <header class="header">
+      <a href="/page" class="logo">FlashCards</a>
+      <nav><a href="/page_lien">Gestion</a></nav>
+      <div class="profil">
+            <p class="nom-compte"></p>
+            <a href="/compte">
+                <img
+                    id="profil-btn"
+                    src="/static/images/profil.jpg"
+                    alt="Profil"
+                    class="profil-icon">
+            </a>
+        </div>
+    </header>
+
+    <div class="page-body">
+      <div class="card">
+        <div class="card-title">Importer des cartes</div>
+
+        <form id="formulaire-import" enctype="multipart/form-data">
+
+            <!-- MATIÈRE -->
+            <div class="champ">
+
+                <label for="nom_mat">Matière</label>
+
+                <select id="nom_mat" name="id_matiere" required>
+
+                    <option value="">
+                        -- Choisir une matière --
+                    </option>
+
+                </select>
+
+            </div>
+
+
+            <!-- CHAPITRE -->
+            <div class="champ">
+
+                <label for="nom_chap">Chapitre</label>
+
+                <select id="nom_chap" name="id_chap" required disabled>
+
+                    <option value="">
+                        -- Choisir d'abord une matière --
+                    </option>
+
+                </select>
+
+            </div>
+
+
+            <!-- FICHIER -->
+            <div class="champ">
+
+                <label for="fichier">
+                    Fichier CSV
+                </label>
+
+                <input
+                    type="file"
+                    id="fichier"
+                    name="fichier"
+                    accept=".csv,text/csv"
+                    required
+                >
+
+            </div>
+
+
+            <button type="submit" class="bouton">
+                Importer les cartes
+            </button>
+
+        </form>
+
+
+        <p id="message"></p>
+
+    </main>
+    <script src="/static/import.js"></script>
+
+</body>
+</html>

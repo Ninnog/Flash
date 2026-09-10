@@ -1083,6 +1083,14 @@ summary{
     background: hsla(24, 84%, 50%, 0.15);
 }
 
+.card-import {
+    border-top: 6px solid var(--accent) !important;
+}
+
+.card-import .hub-card-icon {
+    background: hsla(140, 81%, 45%, 0.15);
+}
+
 .card-modif {
     border-top: 6px solid var(--col-5) !important;
 }

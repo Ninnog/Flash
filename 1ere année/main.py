@@ -9,6 +9,8 @@ import shutil
 import time
 import re
 import unidecode
+import csv
+import io
 
 #  python -m uvicorn main:app --reload
 
@@ -55,7 +57,7 @@ class Note(BaseModel):
     note: int
 
 def get_conn():
-    conn = sqlite3.connect("flash.db")
+    conn = sqlite3.connect("flash2.db")
     conn.row_factory = sqlite3.Row
     return conn
 
@@ -77,10 +79,14 @@ def ajout_chapitre():
 def page_lien():
     return FileResponse("static/annexe.html")
 
+@app.get("/import")
+def page_lien():
+    return FileResponse("static/import.html")
+
 @app.post("/ajouter-chapitre")
 async def ajouter_chapitre(data: ChapitreAjout):
 
-    conn = sqlite3.connect("flash.db")
+    conn = sqlite3.connect("flash2.db")
     cursor = conn.cursor()
 
     cursor.execute(
@@ -142,6 +148,137 @@ def get_matieres():
     conn.close()
 
     return [{"id": r[0], "nom": r[1]} for r in rows]
+
+@app.post("/import-csv")
+async def importer_csv(
+    fichier: UploadFile = File(...),
+    id_chap: int = Form(...),
+    utilisateur: str = Form(...)
+):
+    if not fichier.filename.lower().endswith(".csv"):
+        raise HTTPException(status_code=400,detail="Le fichier doit être au format CSV.")
+    conn = get_conn()
+    
+    try:
+        utilisateur_db = conn.execute("""
+            SELECT id
+            FROM Utilisateur
+            WHERE pseudo = ?
+            """,(utilisateur,)).fetchone()
+
+        if utilisateur_db is None:
+            raise HTTPException(status_code=404,detail="Utilisateur introuvable.")
+
+        id_utilisateur = utilisateur_db["id"]
+
+        chapitre = conn.execute(
+            """
+            SELECT id_chap
+            FROM Chapitre
+            WHERE id_chap = ?
+            AND id_utilisateur = ?
+            """,
+            (id_chap, id_utilisateur)
+        ).fetchone()
+
+        if chapitre is None:
+            raise HTTPException(
+                status_code=404,
+                detail="Chapitre introuvable pour cet utilisateur."
+            )
+
+        contenu = await fichier.read()
+
+        try:
+            texte = contenu.decode("utf-8-sig")
+        except UnicodeDecodeError:
+            raise HTTPException(
+                status_code=400,
+                detail="Le fichier CSV doit être encodé en UTF-8."
+            )
+
+        lecteur = csv.DictReader(io.StringIO(texte))
+
+        if lecteur.fieldnames is None:
+            raise HTTPException(
+                status_code=400,
+                detail="Le fichier CSV est vide."
+            )
+
+        colonnes = [colonne.strip().lower() for colonne in lecteur.fieldnames]
+
+        if "question" not in colonnes or "reponse" not in colonnes:
+            raise HTTPException(
+                status_code=400,
+                detail="Le CSV doit contenir les colonnes 'question' et 'reponse'."
+            )
+
+        nombre_cartes = 0
+
+        for ligne in lecteur:
+            ligne_propre = {
+                cle.strip().lower(): valeur
+                for cle, valeur in ligne.items()
+                if cle is not None
+            }
+
+            question = ligne_propre.get("question")
+            reponse = ligne_propre.get("reponse")
+
+            if not question or not reponse:
+                continue
+
+            conn.execute(
+                """
+                INSERT INTO Carte (
+                    id_chap,
+                    id_utilisateur,
+                    question,
+                    reponse,
+                    image,
+                    interval,
+                    ease,
+                    next_review
+                )
+                VALUES (?, ?, ?, ?, ?, ?, ?, ?)
+                """,
+                (
+                    id_chap,
+                    id_utilisateur,
+                    question.strip(),
+                    reponse.strip(),
+                    None,
+                    0,
+                    2.5,
+                    0
+                )
+            )
+
+            nombre_cartes += 1
+
+        conn.commit()
+
+        return {
+            "message": f"{nombre_cartes} carte(s) importée(s) avec succès.",
+            "nombre": nombre_cartes
+        }
+
+    except HTTPException:
+        conn.rollback()
+        raise
+
+    except Exception as e:
+        conn.rollback()
+
+        print("Erreur import CSV :", e)
+
+        raise HTTPException(
+            status_code=500,
+            detail="Une erreur est survenue lors de l'importation du CSV."
+        )
+
+    finally:
+        conn.close()
 
 @app.get("/chapitres/{id_matiere}")
 def get_chapitres(id_matiere: int, utilisateur: str):
