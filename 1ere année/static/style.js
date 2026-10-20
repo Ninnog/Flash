@@ -10,6 +10,18 @@ let popupUtilisateur;
 let nomCompte;
 let chemin = `${window.BACKEND_URL}` ;
 
+function afficherLatex(element) {
+    renderMathInElement(element, {
+        delimiters: [
+            { left: "$$", right: "$$", display: true },
+            { left: "$", right: "$", display: false },
+            { left: "\\[", right: "\\]", display: true },
+            { left: "\\(", right: "\\)", display: false }
+        ],
+        throwOnError: false
+    });
+}
+
 function initUtilisateur() {
     const utilisateurEnregistre = localStorage.getItem("utilisateur");
 
@@ -34,6 +46,8 @@ function afficherCarte() {
         texte.style.marginBottom = "15px";
         texte.innerHTML = carte.reponse.replaceAll("\n", "<br>");
         reponse.appendChild(texte);
+        afficherLatex(question);
+        afficherLatex(reponse);
     }
 
     if (carte.image && carte.image.trim() !== "") {
