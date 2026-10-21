@@ -123,7 +123,21 @@ async def ajouter_chapitre(data: ChapitreAjout):
         (
             data.nomChapitre,
             data.matiereId,
-            id_utilisateur
+            1
+        )
+    )
+    
+    cursor.execute(
+        """
+        INSERT INTO Chapitre
+        (nom_chap, id_matiere, id_utilisateur)
+
+        VALUES (?, ?, ?)
+        """,
+        (
+            data.nomChapitre,
+            data.matiereId,
+            2
         )
     )
 
@@ -149,6 +163,7 @@ def get_matieres():
 
     return [{"id": r[0], "nom": r[1]} for r in rows]
 
+
 @app.post("/import-csv")
 async def importer_csv(
     fichier: UploadFile = File(...),
@@ -156,37 +171,59 @@ async def importer_csv(
     utilisateur: str = Form(...)
 ):
     if not fichier.filename.lower().endswith(".csv"):
-        raise HTTPException(status_code=400,detail="Le fichier doit être au format CSV.")
+        raise HTTPException(
+            status_code=400,
+            detail="Le fichier doit être au format CSV."
+        )
+
     conn = get_conn()
-    
+
     try:
-        utilisateur_db = conn.execute("""
+        # 1. Vérifier que le chapitre sélectionné existe
+        # et récupérer son nom et sa matière
+        chapitre_selectionne = conn.execute("""
+            SELECT nom_chap, id_matiere
+            FROM Chapitre
+            WHERE id_chap = ?
+        """, (id_chap,)).fetchone()
+
+        if chapitre_selectionne is None:
+            raise HTTPException(
+                status_code=404,
+                detail="Chapitre introuvable."
+            )
+
+        nom_chapitre = chapitre_selectionne["nom_chap"]
+        matiere_id = chapitre_selectionne["id_matiere"]
+
+        # 2. Vérifier l'utilisateur qui a demandé l'importation
+        user = conn.execute("""
             SELECT id
             FROM Utilisateur
             WHERE pseudo = ?
-            """,(utilisateur,)).fetchone()
+        """, (utilisateur,)).fetchone()
 
-        if utilisateur_db is None:
-            raise HTTPException(status_code=404,detail="Utilisateur introuvable.")
+        if user is None:
+            raise HTTPException(
+                status_code=404,
+                detail="Utilisateur introuvable."
+            )
 
-        id_utilisateur = utilisateur_db["id"]
-
-        chapitre = conn.execute(
-            """
+        # Vérifier que le chapitre appartient bien à cet utilisateur
+        chapitre_utilisateur = conn.execute("""
             SELECT id_chap
             FROM Chapitre
             WHERE id_chap = ?
-            AND id_utilisateur = ?
-            """,
-            (id_chap, id_utilisateur)
-        ).fetchone()
+              AND id_utilisateur = ?
+        """, (id_chap, user["id"])).fetchone()
 
-        if chapitre is None:
+        if chapitre_utilisateur is None:
             raise HTTPException(
-                status_code=404,
-                detail="Chapitre introuvable pour cet utilisateur."
+                status_code=403,
+                detail="Ce chapitre ne vous appartient pas."
             )
 
+        # 3. Lire le fichier CSV
         contenu = await fichier.read()
 
         try:
@@ -205,7 +242,11 @@ async def importer_csv(
                 detail="Le fichier CSV est vide."
             )
 
-        colonnes = [colonne.strip().lower() for colonne in lecteur.fieldnames]
+        colonnes = [
+            colonne.strip().lower()
+            for colonne in lecteur.fieldnames
+            if colonne is not None
+        ]
 
         if "question" not in colonnes or "reponse" not in colonnes:
             raise HTTPException(
@@ -213,6 +254,45 @@ async def importer_csv(
                 detail="Le CSV doit contenir les colonnes 'question' et 'reponse'."
             )
 
+        # 4. Récupérer les chapitres correspondants
+        # pour les deux utilisateurs
+        utilisateurs = conn.execute("""
+            SELECT id
+            FROM Utilisateur
+            WHERE id IN (1, 2)
+        """).fetchall()
+
+        chapitres_cibles = []
+
+        for user_cible in utilisateurs:
+            id_user = user_cible["id"]
+
+            chapitre_cible = conn.execute("""
+                SELECT id_chap
+                FROM Chapitre
+                WHERE id_matiere = ?
+                  AND nom_chap = ?
+                  AND id_utilisateur = ?
+            """, (
+                matiere_id,
+                nom_chapitre,
+                id_user
+            )).fetchone()
+
+            if chapitre_cible is not None:
+                chapitres_cibles.append((
+                    chapitre_cible["id_chap"],
+                    id_user
+                ))
+
+        if not chapitres_cibles:
+            raise HTTPException(
+                status_code=404,
+                detail="Aucun chapitre correspondant trouvé."
+            )
+
+        # 5. Importer les cartes
+        nombre_lignes = 0
         nombre_cartes = 0
 
         for ligne in lecteur:
@@ -228,38 +308,47 @@ async def importer_csv(
             if not question or not reponse:
                 continue
 
-            conn.execute(
-                """
-                INSERT INTO Carte (
-                    id_chap,
-                    id_utilisateur,
+            question = question.strip()
+            reponse = reponse.strip()
+
+            if not question or not reponse:
+                continue
+
+            nombre_lignes += 1
+
+            for id_chap_cible, id_user in chapitres_cibles:
+                conn.execute("""
+                    INSERT INTO Carte (
+                        id_chap,
+                        id_utilisateur,
+                        question,
+                        reponse,
+                        image,
+                        interval,
+                        ease,
+                        next_review
+                    )
+                    VALUES (?, ?, ?, ?, ?, ?, ?, ?)
+                """, (
+                    id_chap_cible,
+                    id_user,
                     question,
                     reponse,
-                    image,
-                    interval,
-                    ease,
-                    next_review
-                )
-                VALUES (?, ?, ?, ?, ?, ?, ?, ?)
-                """,
-                (
-                    id_chap,
-                    id_utilisateur,
-                    question.strip(),
-                    reponse.strip(),
-                    None,
+                    "",
                     0,
                     2.5,
                     0
-                )
-            )
+                ))
 
-            nombre_cartes += 1
+                nombre_cartes += 1
 
         conn.commit()
 
         return {
-            "message": f"{nombre_cartes} carte(s) importée(s) avec succès.",
+            "message": (
+                f"{nombre_lignes} ligne(s) importée(s), "
+                f"{nombre_cartes} carte(s) créée(s)."
+            ),
             "nombre": nombre_cartes
         }
 
@@ -269,7 +358,6 @@ async def importer_csv(
 
     except Exception as e:
         conn.rollback()
-
         print("Erreur import CSV :", e)
 
         raise HTTPException(
@@ -279,6 +367,7 @@ async def importer_csv(
 
     finally:
         conn.close()
+
 
 @app.get("/chapitres/{id_matiere}")
 def get_chapitres(id_matiere: int, utilisateur: str):
@@ -344,6 +433,7 @@ def get_cartes(chapitre_id: int,utilisateur : str = Query(...)):
             "image": row["image"] if row["image"] else ""
         }for row in rows]
 
+
 @app.post("/ajouter-carte")
 async def ajouter_carte(
     matiere_id: int = Form(...),
@@ -353,8 +443,12 @@ async def ajouter_carte(
     utilisateur: str = Form(...),
     image: UploadFile | None = File(None)
 ):
+    print("Ajout d'une carte")
 
-    if (not reponse or reponse.strip() == "") and image is None:
+    # Vérifier qu'une réponse ou une image est fournie
+    if (not reponse or reponse.strip() == "") and (
+        image is None or image.filename == ""
+    ):
         raise HTTPException(
             status_code=400,
             detail="Vous devez saisir une réponse ou une image."
@@ -363,75 +457,152 @@ async def ajouter_carte(
     conn = get_conn()
     cur = conn.cursor()
 
-    cur.execute(
-        "SELECT id FROM Utilisateur WHERE pseudo = ?",
-        (utilisateur,)
-    )
-
-    user = cur.fetchone()
-
-    if user is None:
-        conn.close()
-        raise HTTPException(status_code=404, detail="Utilisateur introuvable")
-
-    id_utilisateur = user["id"]
-
-    cur.execute("""
-        SELECT m.nom_matiere, c.nom_chap
-        FROM Chapitre c
-        JOIN Matiere m ON c.id_matiere = m.id_matiere
-        WHERE c.id_chap = ?
-    """, (chapitre_id,))
-
-    row = cur.fetchone()
-
-    if row is None:
-        conn.close()
-        raise HTTPException(status_code=404, detail="Chapitre introuvable")
-
-    nom_matiere = nettoyer_nom(row["nom_matiere"])
-    nom_chapitre = nettoyer_nom(row["nom_chap"])
-
-    image_path = ""
-
-    if image is not None and image.filename != "":
-        
-        nom_chapitre = unidecode.unidecode(nom_chapitre)
-        
-        dossier = os.path.join("static", "images", nom_matiere, nom_chapitre)
-        os.makedirs(dossier, exist_ok=True)
-
-        extension = image.filename.split(".")[-1]
-        filename = f"{int(time.time())}.{extension}"
-
-        chemin_complet = os.path.join(dossier, filename)
-
-        with open(chemin_complet, "wb") as buffer:
-            shutil.copyfileobj(image.file, buffer)
-        
-        image_path = f"{nom_matiere}/{nom_chapitre}/{filename}"
-
-    cur.execute("""
-        INSERT INTO Carte (
-            id_chap,
-            id_utilisateur,
-            question,
-            reponse,
-            image
+    try:
+        # 1. Identifier l'utilisateur connecté
+        cur.execute(
+            "SELECT id FROM Utilisateur WHERE pseudo = ?",
+            (utilisateur,)
         )
-        VALUES (?, ?, ?, ?, ?)
-    """, (
-        chapitre_id,
-        id_utilisateur,
-        question,
-        reponse if reponse else "",
-        image_path
-    ))
+        user = cur.fetchone()
 
-    conn.commit()
-    conn.close()
+        if user is None:
+            raise HTTPException(
+                status_code=404,
+                detail="Utilisateur introuvable"
+            )
 
-    return {"status": "ok"}
+        id_utilisateur = user["id"]
+
+        # 2. Vérifier le chapitre sélectionné et récupérer son nom
+        cur.execute("""
+            SELECT nom_chap, id_matiere
+            FROM Chapitre
+            WHERE id_chap = ?
+              AND id_utilisateur = ?
+              AND id_matiere = ?
+        """, (chapitre_id, id_utilisateur, matiere_id))
+
+        chapitre_selectionne = cur.fetchone()
+
+        if chapitre_selectionne is None:
+            raise HTTPException(
+                status_code=404,
+                detail="Chapitre introuvable pour cet utilisateur"
+            )
+
+        nom_chapitre = chapitre_selectionne["nom_chap"]
+
+        # 3. Récupérer le nom de la matière
+        cur.execute("""
+            SELECT nom_matiere
+            FROM Matiere
+            WHERE id_matiere = ?
+        """, (matiere_id,))
+
+        matiere = cur.fetchone()
+
+        if matiere is None:
+            raise HTTPException(
+                status_code=404,
+                detail="Matière introuvable"
+            )
+
+        nom_matiere = nettoyer_nom(matiere["nom_matiere"])
+
+        # 4. Préparer l'image une seule fois si elle existe
+        image_path = ""
+
+        if image is not None and image.filename != "":
+            nom_chapitre_dossier = unidecode.unidecode(
+                nettoyer_nom(nom_chapitre)
+            )
+
+            dossier = os.path.join(
+                "static",
+                "images",
+                nom_matiere,
+                nom_chapitre_dossier
+            )
+            os.makedirs(dossier, exist_ok=True)
+
+            extension = os.path.splitext(image.filename)[1].lower()
+
+            if not extension:
+                extension = ".img"
+
+            filename = f"{int(time.time() * 1000)}{extension}"
+            chemin_complet = os.path.join(dossier, filename)
+
+            with open(chemin_complet, "wb") as buffer:
+                shutil.copyfileobj(image.file, buffer)
+
+            image_path = (
+                f"{nom_matiere}/{nom_chapitre_dossier}/{filename}"
+            )
+
+        # 5. Trouver le chapitre correspondant chez chaque utilisateur
+        cur.execute("SELECT id FROM Utilisateur")
+        utilisateurs = cur.fetchall()
+
+        cartes_ajoutees = 0
+
+        for user_cible in utilisateurs:
+            id_cible = user_cible["id"]
+
+            cur.execute("""
+                SELECT id_chap
+                FROM Chapitre
+                WHERE id_matiere = ?
+                  AND nom_chap = ?
+                  AND id_utilisateur = ?
+            """, (matiere_id, nom_chapitre, id_cible))
+
+            chapitre_cible = cur.fetchone()
+
+            # Si l'utilisateur n'a pas ce chapitre, on passe au suivant
+            if chapitre_cible is None:
+                continue
+
+            # 6. Ajouter la carte dans le chapitre de cet utilisateur
+            cur.execute("""
+                INSERT INTO Carte (
+                    id_chap,
+                    id_utilisateur,
+                    question,
+                    reponse,
+                    image
+                )
+                VALUES (?, ?, ?, ?, ?)
+            """, (
+                chapitre_cible["id_chap"],
+                id_cible,
+                question,
+                reponse.strip() if reponse else "",
+                image_path
+            ))
+
+            cartes_ajoutees += 1
+
+        if cartes_ajoutees == 0:
+            raise HTTPException(
+                status_code=404,
+                detail="Aucun chapitre correspondant trouvé"
+            )
+
+        conn.commit()
+
+        return {
+            "status": "ok",
+            "cartes_ajoutees": cartes_ajoutees
+        }
+
+    except Exception:
+        conn.rollback()
+        raise
+
+    finally:
+        conn.close()
+
 
 @app.post("/note-carte")
 def note_carte(data: Note):
