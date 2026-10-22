@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="/static/modif.css">
+  <title>FlashCards - Modifier un chapitre</title>
+</head>
+<body>
+  <header class="header">
+    <a href="/page" class="logo">FlashCards</a>
+    <nav><a href="/page_lien">Gestion</a></nav>
+  </header>
+
+  <main class="page-body">
+    <section class="card">
+      <div class="card-title">Modifier ou supprimer un chapitre</div>
+
+      <div class="form-grid">
+        <div class="form-group">
+          <label for="nom_mat">Matière</label>
+          <select id="nom_mat" required>
+            <option value="">-- Choisir une matière --</option>
+          </select>
+        </div>
+
+        <div class="form-group">
+          <label for="nom_chap">Chapitre</label>
+          <select id="nom_chap" disabled required>
+            <option value="">-- Choisir un chapitre --</option>
+          </select>
+        </div>
+
+        <div class="divider"></div>
+
+        <form id="formulaire" class="form-grid">
+          <div class="form-group">
+            <label for="nouveau_nom">Nom du chapitre</label>
+            <input id="nouveau_nom" name="nom_chap" type="text" maxlength="150" placeholder="Nouveau nom du chapitre" disabled required>
+          </div>
+          <button id="modifier" class="submit-btn" type="submit" disabled>Enregistrer le nom</button>
+          <button id="supprimer" class="delete-btn" type="button" disabled>Supprimer le chapitre</button>
+        </form>
+        <p id="message" class="message" role="status" aria-live="polite"></p>
+      </div>
+    </section>
+  </main>
+
+  <script src="/static/config.js"></script>
+  <script src="/static/modif_chap.js"></script>
+</body>
+</html>

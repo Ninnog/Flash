@@ -30,6 +30,10 @@ def compte():
 def compte():
     return FileResponse("static/modif.html")
 
+@app.get("/modif_chap")
+def compte():
+    return FileResponse("static/modif_chap.html")
+
 @app.get("/ajout")
 def compte():
     return FileResponse("static/ajout.html")
@@ -995,3 +999,124 @@ def statistiques(utilisateur: str):
     return {
         "details": matieres
     }
+
+@app.post("/supprimer-chapitre")
+def supprimer_chapitre(
+    id_chap: int = Form(...),
+    utilisateur: str = Form(...)
+):
+    conn = get_conn()
+    cur = conn.cursor()
+
+    try:
+        # Récupérer l'identifiant de l'utilisateur connecté
+        cur.execute(
+            "SELECT id FROM Utilisateur WHERE pseudo = ?",
+            (utilisateur,)
+        )
+        user = cur.fetchone()
+
+        if user is None:
+            raise HTTPException(status_code=404, detail="Utilisateur introuvable")
+
+        id_utilisateur = user["id"]
+
+        # Vérifier que le chapitre appartient à cet utilisateur
+        cur.execute(
+            """
+            SELECT id_chap
+            FROM Chapitre
+            WHERE id_chap = ? AND id_utilisateur = ?
+            """,
+            (id_chap, id_utilisateur)
+        )
+
+        chapitre = cur.fetchone()
+
+        if chapitre is None:
+            raise HTTPException(
+                status_code=404,
+                detail="Chapitre introuvable pour cet utilisateur"
+            )
+
+        # Supprimer uniquement les cartes de ce chapitre
+        cur.execute(
+            """
+            DELETE FROM Carte
+            WHERE id_chap = ? AND id_utilisateur = ?
+            """,
+            (id_chap, id_utilisateur)
+        )
+
+        # Supprimer uniquement le chapitre de cet utilisateur
+        cur.execute(
+            """
+            DELETE FROM Chapitre
+            WHERE id_chap = ? AND id_utilisateur = ?
+            """,
+            (id_chap, id_utilisateur)
+        )
+
+        conn.commit()
+
+        return {"message": "Chapitre supprimé avec succès"}
+
+    finally:
+        conn.close()
+        
+@app.post("/modifier-chapitre")
+def modifier_chapitre(
+    id_chap: int = Form(...),
+    nom_chap: str = Form(...),
+    utilisateur: str = Form(...)
+):
+    conn = get_conn()
+    cur = conn.cursor()
+
+    try:
+        # Récupérer l'identifiant de l'utilisateur connecté
+        cur.execute(
+            "SELECT id FROM Utilisateur WHERE pseudo = ?",
+            (utilisateur,)
+        )
+        user = cur.fetchone()
+
+        if user is None:
+            raise HTTPException(status_code=404, detail="Utilisateur introuvable")
+
+        id_utilisateur = user["id"]
+
+        # Vérifier que le chapitre appartient à cet utilisateur
+        cur.execute(
+            """
+            SELECT id_chap
+            FROM Chapitre
+            WHERE id_chap = ? AND id_utilisateur = ?
+            """,
+            (id_chap, id_utilisateur)
+        )
+
+        chapitre = cur.fetchone()
+
+        if chapitre is None:
+            raise HTTPException(
+                status_code=404,
+                detail="Chapitre introuvable pour cet utilisateur"
+            )
+
+        # Modifier uniquement ce chapitre
+        cur.execute(
+            """
+            UPDATE Chapitre
+            SET nom_chap = ?
+            WHERE id_chap = ? AND id_utilisateur = ?
+            """,
+            (nom_chap, id_chap, id_utilisateur)
+        )
+
+        conn.commit()
+
+        return {"message": "Chapitre modifié avec succès"}
+
+    finally:
+        conn.close()
